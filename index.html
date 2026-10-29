@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>철민쌤 영어 교실 | 선생님·학생이 함께 쓰는 영어 수업 사이트</title>
+<meta name="description" content="단어·문법·듣기·말하기·독해·게임·영작과 기말고사 시험 범위, 선생님용 학생 활동 통계·과제·채점까지 담은 영어 수업 사이트.">
+<meta name="theme-color" content="#1f5fd3">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* Layout: one calm column, a quiet top bar, pill tabs, content cards only where they earn it. */
+:root{
+ --bg:#f5f7fb; --panel:#ffffff; --ink:#151a2b; --muted:#6b7488; --line:#e3e7f0; --soft:#eef2f9;
+ --accent:#1f5fd3; --accent-ink:#ffffff; --accent-soft:#e4ecfc;
+ --good:#15803d; --good-soft:#dcfce7; --bad:#c2410c; --bad-soft:#ffedd5; --warn:#a16207; --warn-soft:#fef3c7;
+ --shadow:0 1px 2px rgba(21,26,43,.05),0 8px 24px rgba(21,26,43,.06);
+ --ui:'Plus Jakarta Sans','Noto Sans KR',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+ --serif:'Newsreader',Georgia,'Times New Roman',serif;
+ --r:14px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+ --bg:#0f1320; --panel:#171c2c; --ink:#eef1f8; --muted:#9aa3b8; --line:#283049; --soft:#1f263a;
+ --accent:#6c9bff; --accent-ink:#0b1430; --accent-soft:#1d2b4f;
+ --good:#4ade80; --good-soft:#14321f; --bad:#fb923c; --bad-soft:#3a1f0d; --warn:#fcd34d; --warn-soft:#3a2d0a;
+ --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35); color-scheme:dark}}
+:root[data-theme="dark"]{
+ --bg:#0f1320; --panel:#171c2c; --ink:#eef1f8; --muted:#9aa3b8; --line:#283049; --soft:#1f263a;
+ --accent:#6c9bff; --accent-ink:#0b1430; --accent-soft:#1d2b4f;
+ --good:#4ade80; --good-soft:#14321f; --bad:#fb923c; --bad-soft:#3a1f0d; --warn:#fcd34d; --warn-soft:#3a2d0a;
+ --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35); color-scheme:dark}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+h1,h2,h3{margin:0;text-wrap:balance;letter-spacing:-.01em}
+h2{font-size:22px;font-weight:700}
+h3{font-size:16px;font-weight:700}
+p{margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:9px 14px;font-weight:600;transition:background .15s,border-color .15s,transform .05s}
+button:hover{background:var(--soft)}
+button:active{transform:translateY(1px)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button.pri{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+button.pri:hover{filter:brightness(1.08)}
+button.ghost{background:transparent}
+button.sm{padding:6px 10px;font-size:13px;border-radius:8px}
+button.danger{color:var(--bad);border-color:var(--bad-soft)}
+input,select,textarea{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:10px 12px;width:100%}
+textarea{resize:vertical;min-height:120px;line-height:1.6}
+.wrap{max-width:980px;margin:0 auto;padding-block:20px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .in{max-width:980px;margin:0 auto;display:flex;align-items:center;gap:14px;padding-block:12px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px}
+.mark{width:36px;height:36px;border-radius:10px;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-family:var(--serif);font-size:22px;font-weight:500;font-style:italic;line-height:1}
+.brand h1{font-size:17px;font-weight:800}
+.brand small{display:block;font-size:12px;color:var(--muted);font-weight:500}
+.who{margin-left:auto;display:flex;align-items:center;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;font-size:13px;font-weight:600;background:var(--soft)}
+.chip.t{background:var(--accent-soft);color:var(--accent)}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:18px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{white-space:nowrap;border-radius:999px;padding:8px 14px;font-size:14px;border-color:transparent;background:transparent;color:var(--muted)}
+.tabs button:hover{background:var(--soft);color:var(--ink)}
+.tabs button.on{background:var(--ink);color:var(--bg)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:var(--shadow)}
+.card+.card{margin-top:14px}
+.stack>*+*{margin-top:14px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.row>*{min-width:0}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.serif{font-family:var(--serif)}
+.en{font-family:var(--serif);font-size:1.25em;font-weight:500}
+.stat{flex:1;min-width:110px;background:var(--soft);border-radius:12px;padding:12px 14px}
+.stat .num{display:block;font-size:26px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.1}
+.stat span{font-size:12px;color:var(--muted)}
+.menu{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));margin-top:14px}
+.menu button{text-align:left;padding:14px;border-radius:12px;display:flex;flex-direction:column;gap:4px;min-height:92px}
+.menu .ic{font-size:20px}
+.menu b{font-size:14px}
+.menu span:last-child{font-size:12px;color:var(--muted);font-weight:500;line-height:1.35}
+.opt{display:grid;gap:8px;margin-top:12px}
+.opt button{text-align:left;padding:12px 14px;border-radius:12px;font-weight:500}
+.opt button.ok{background:var(--good-soft);border-color:var(--good);color:var(--ink)}
+.opt button.no{background:var(--bad-soft);border-color:var(--bad);color:var(--ink)}
+.prog{height:6px;background:var(--soft);border-radius:999px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--accent);border-radius:999px;transition:width .3s}
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:600;background:var(--soft)}
+.pill.good{background:var(--good-soft);color:var(--good)}
+.pill.bad{background:var(--bad-soft);color:var(--bad)}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+.pill.acc{background:var(--accent-soft);color:var(--accent)}
+.notice{background:var(--accent-soft);border-radius:12px;padding:14px 16px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+td.n{font-variant-numeric:tabular-nums;text-align:right}
+.tscroll{overflow-x:auto}
+.flash{perspective:1200px;min-height:220px}
+.flash .inner{position:relative;width:100%;min-height:220px;transition:transform .5s;transform-style:preserve-3d}
+.flash.flip .inner{transform:rotateY(180deg)}
+.flash .face{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:24px;border-radius:16px;background:var(--panel);border:1px solid var(--line);backface-visibility:hidden;text-align:center;box-shadow:var(--shadow)}
+.flash .back{transform:rotateY(180deg);background:var(--soft)}
+.word{font-family:var(--serif);font-size:40px;font-weight:500;letter-spacing:-.01em;line-height:1.1}
+.pos{font-size:12px;color:var(--muted);font-style:italic}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chips button{border-radius:999px;padding:7px 13px;font-weight:500}
+.chips button.used{opacity:.35;pointer-events:none}
+.slot{min-height:52px;border:1px dashed var(--line);border-radius:12px;padding:8px;display:flex;gap:6px;flex-wrap:wrap;align-items:center;background:var(--soft)}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:999px;font-size:14px;font-weight:600;opacity:0;transition:.25s;z-index:50;pointer-events:none;max-width:90vw;text-align:center}
+.toast.on{opacity:1;transform:translateX(-50%)}
+.gate{min-height:calc(100vh - 40px);display:flex;align-items:center;justify-content:center}
+.gate .box{width:100%;max-width:820px}
+.roles{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));margin-top:22px}
+.role{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:12px}
+.role .big{font-size:30px}
+.role p{font-size:13px;color:var(--muted)}
+.role form{display:grid;gap:8px;margin-top:auto}
+.hero-word{font-family:var(--serif);font-size:clamp(34px,6vw,56px);font-weight:400;letter-spacing:-.02em;line-height:1.05}
+.bar{display:flex;align-items:flex-end;gap:8px;height:120px}
+.bar div{flex:1;background:var(--accent);border-radius:6px 6px 2px 2px;position:relative;min-width:12px}
+.bar div span{position:absolute;bottom:100%;left:0;right:0;text-align:center;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums;padding-bottom:2px}
+.bar div b{position:absolute;top:100%;left:0;right:0;text-align:center;font-size:11px;color:var(--muted);font-weight:500;padding-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.list{display:grid;gap:8px}
+.item{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.item.on{background:var(--good-soft);border-color:var(--good)}
+.item input[type=checkbox]{width:18px;height:18px;margin-top:3px;accent-color:var(--accent)}
+.passage{font-family:var(--serif);font-size:18px;line-height:1.7;background:var(--soft);padding:18px 20px;border-radius:12px}
+.timer{font-size:48px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.03em;text-align:center}
+.big-score{font-size:56px;font-weight:800;letter-spacing:-.03em;line-height:1}
+.footer{text-align:center;font-size:12px;color:var(--muted);margin-top:40px}
+.kbd{font-family:ui-monospace,Menlo,monospace;font-size:12px;background:var(--soft);padding:2px 6px;border-radius:6px}
+.hl{background:var(--warn-soft)}
+@media (max-width:520px){.card{padding:16px}.word{font-size:32px}h2{font-size:20px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div class="toast" id="toast"></div>
+<script>
+/* ================= DATA ================= */
+const TEACHER_NAME='철민쌤';
+const TEACHER_ID_HASH='8ed0cc271842467223afc93fb925c547ee0648fc89929ffb064de04810d40b83';
+const TEACHER_PW_HASH='563dfdc0386754287cf3204eef9dc8284f7711937eff131b58d25f5f833d594d';
+const GRADES=[['m1','중학교 1학년'],['m2','중학교 2학년'],['m3','중학교 3학년'],['h1','고등학교 1학년'],['h2','고등학교 2학년'],['h3','고등학교 3학년']];
+const gname=g=>(GRADES.find(x=>x[0]===g)||GRADES[0])[1];
+
+const DEFAULT_RANGE={
+ m1:{title:'중1 영어 기말고사 범위',units:[
+  ['Lesson 5. My Dream Job','be동사·일반동사 현재형, 직업 어휘, want to + 동사원형'],
+  ['Lesson 6. Around the World','There is/are, 전치사(in, on, at), 나라·국적 어휘'],
+  ['Lesson 7. Let\'s Go Shopping','How much ~?, 셀 수 있는/없는 명사, some/any'],
+  ['Lesson 8. Healthy Life','조동사 can/should, 명령문, 건강 어휘']],
+  tips:['교과서 본문을 소리 내서 3번 읽고, 모르는 단어에 동그라미 치기','be동사와 일반동사 부정문·의문문을 표로 정리하기','단원별 핵심 표현(Key Expressions) 암기 카드 만들기']},
+ m2:{title:'중2 영어 기말고사 범위',units:[
+  ['Lesson 5. Stories Behind the Names','과거시제, 접속사 when/because, 수동태 기초'],
+  ['Lesson 6. Living Together','to부정사의 명사적 용법, 비교급·최상급'],
+  ['Lesson 7. Science in Everyday Life','동명사, 현재완료 기초, 과학 어휘'],
+  ['Lesson 8. Think Green','조건문 if, 재귀대명사, 환경 어휘']],
+  tips:['불규칙 동사 과거형 50개 외우기(이 사이트의 불규칙 동사 탭)','본문에서 to부정사·동명사 문장 찾아 밑줄 긋기','비교급 문장 10개 직접 만들어 보기']},
+ m3:{title:'중3 영어 기말고사 범위',units:[
+  ['Lesson 5. Art Around Us','현재완료 용법 4가지, 관계대명사 who/which/that'],
+  ['Lesson 6. Be a Smart Consumer','간접의문문, 분사(현재분사·과거분사)'],
+  ['Lesson 7. Across the Globe','가정법 과거, so ~ that, too ~ to'],
+  ['Lesson 8. Looking Ahead','관계부사 where/when, 접속사 although']],
+  tips:['관계대명사 문장은 두 문장으로 쪼개 보기','본문 빈칸 채우기 학습지 2회 풀기','서술형 대비: 문장 전환(수동태·간접의문문) 연습']},
+ h1:{title:'고1 영어 기말고사 범위',units:[
+  ['Lesson 4. The Power of Habits','분사구문, 강조 구문 it ~ that'],
+  ['Lesson 5. Technology and Us','가정법 과거완료, 도치'],
+  ['Lesson 6. Cultural Diversity','관계대명사 계속적 용법, 복합관계사'],
+  ['모의고사 지문 10편','빈칸 추론, 순서 배열, 문장 삽입']],
+  tips:['지문마다 주제문(Topic Sentence) 한 줄 요약하기','어법 포인트(수일치·시제·분사) 문장에서 찾기','모르는 단어는 문맥으로 먼저 추측한 뒤 확인']},
+ h2:{title:'고2 영어 기말고사 범위',units:[
+  ['Lesson 3. Living in a Global Village','명사절 접속사 that/whether, 동격'],
+  ['Lesson 4. Beyond the Limits','과거완료, 분사구문의 시제'],
+  ['Lesson 5. Science and Ethics','가정법 혼합, 부정어 도치'],
+  ['EBS 연계 지문 12편','주제·제목·요지, 함축 의미 추론']],
+  tips:['긴 문장은 주어·동사부터 찾아 끊어 읽기','EBS 지문은 한글 해석 없이 1회독 후 확인','어휘는 유의어·반의어를 함께 묶어 외우기']},
+ h3:{title:'고3 영어 기말고사 범위',units:[
+  ['수능특강 Reading 1~12강','빈칸·순서·삽입·무관한 문장'],
+  ['수능완성 실전 모의고사 1~3회','듣기 17문항 포함 실전 연습'],
+  ['어법 총정리','수일치, 시제, 능동/수동, 관계사, 병렬'],
+  ['고난도 어휘 300','문맥 속 어휘 추론']],
+  tips:['매일 지문 5개, 시간 재고 풀기','오답은 "왜 틀렸는지" 한 줄로 기록','듣기는 받아쓰기(이 사이트의 받아쓰기 탭)로 보완']}
+};
+
+/* 100 words: [word, pos, meaning, example] */
+const VOCAB=[
+ ['achieve','v.','성취하다, 이루다','She worked hard to achieve her goal.'],
+ ['admire','v.','존경하다, 감탄하다','I admire people who never give up.'],
+ ['advantage','n.','장점, 이점','Living near school has many advantages.'],
+ ['ancient','adj.','고대의','We visited the ancient temple in Gyeongju.'],
+ ['anxious','adj.','불안한, 걱정하는','He felt anxious before the test.'],
+ ['appreciate','v.','감사하다, 진가를 알아보다','I really appreciate your help.'],
+ ['approach','v.','다가가다, 접근하다','The cat slowly approached the bird.'],
+ ['attitude','n.','태도','A positive attitude makes a difference.'],
+ ['available','adj.','이용할 수 있는','The book is available at the library.'],
+ ['average','n./adj.','평균(의)','The average score was 78.'],
+ ['benefit','n./v.','이익; 이익을 얻다','Exercise benefits both body and mind.'],
+ ['brief','adj.','짧은, 간결한','He gave a brief answer.'],
+ ['calm','adj.','차분한','Stay calm and think carefully.'],
+ ['career','n.','직업, 경력','She wants a career in medicine.'],
+ ['challenge','n./v.','도전; 도전하다','Learning a language is a challenge.'],
+ ['community','n.','공동체, 지역 사회','Our community holds a festival every fall.'],
+ ['compare','v.','비교하다','Compare the two pictures and find differences.'],
+ ['complain','v.','불평하다','He always complains about the weather.'],
+ ['confident','adj.','자신감 있는','Be confident when you speak English.'],
+ ['consider','v.','고려하다, 여기다','Consider all options before you decide.'],
+ ['continue','v.','계속하다','The rain continued all day.'],
+ ['convenient','adj.','편리한','Online shopping is very convenient.'],
+ ['culture','n.','문화','We learned about Korean culture.'],
+ ['curious','adj.','호기심 많은','Children are curious about everything.'],
+ ['decide','v.','결정하다','I decided to join the English club.'],
+ ['describe','v.','묘사하다, 설명하다','Describe your best friend in three words.'],
+ ['deserve','v.','~할 자격이 있다','You deserve a break after all that work.'],
+ ['develop','v.','개발하다, 발달하다','Reading develops your imagination.'],
+ ['disappear','v.','사라지다','The sun disappeared behind the clouds.'],
+ ['discover','v.','발견하다','Scientists discovered a new planet.'],
+ ['effort','n.','노력','Your effort will pay off.'],
+ ['encourage','v.','격려하다','My teacher encouraged me to try again.'],
+ ['environment','n.','환경','We should protect the environment.'],
+ ['essential','adj.','필수적인','Water is essential for life.'],
+ ['experience','n./v.','경험; 경험하다','It was a wonderful experience.'],
+ ['explain','v.','설명하다','Can you explain this rule again?'],
+ ['express','v.','표현하다','Music is a way to express feelings.'],
+ ['familiar','adj.','익숙한, 친숙한','Her face looks familiar to me.'],
+ ['favorite','adj.','가장 좋아하는','My favorite subject is English.'],
+ ['focus','v./n.','집중하다; 초점','Focus on one thing at a time.'],
+ ['generous','adj.','너그러운, 후한','He is generous with his time.'],
+ ['habit','n.','습관','Reading before bed is a good habit.'],
+ ['honest','adj.','정직한','Be honest with yourself.'],
+ ['imagine','v.','상상하다','Imagine a world without phones.'],
+ ['improve','v.','향상시키다','Practice every day to improve.'],
+ ['include','v.','포함하다','The price includes lunch.'],
+ ['independent','adj.','독립적인','She became independent at eighteen.'],
+ ['influence','n./v.','영향; 영향을 주다','Friends influence each other.'],
+ ['invent','v.','발명하다','Who invented the telephone?'],
+ ['journey','n.','여행, 여정','Life is a long journey.'],
+ ['knowledge','n.','지식','Knowledge is power.'],
+ ['local','adj.','지역의, 현지의','We ate at a local restaurant.'],
+ ['manage','v.','관리하다, 해내다','How do you manage your time?'],
+ ['memory','n.','기억, 추억','I have happy memories of summer camp.'],
+ ['mention','v.','언급하다','He didn\'t mention the problem.'],
+ ['natural','adj.','자연의, 자연스러운','It\'s natural to feel nervous.'],
+ ['necessary','adj.','필요한','Sleep is necessary for health.'],
+ ['nervous','adj.','긴장한','I get nervous before speaking in public.'],
+ ['observe','v.','관찰하다','We observed the stars through a telescope.'],
+ ['opportunity','n.','기회','Don\'t miss this opportunity.'],
+ ['opinion','n.','의견','In my opinion, the movie was great.'],
+ ['participate','v.','참여하다','Everyone participated in the game.'],
+ ['patient','adj./n.','참을성 있는; 환자','Be patient; learning takes time.'],
+ ['perform','v.','공연하다, 수행하다','The band performed at the festival.'],
+ ['polite','adj.','예의 바른','It is polite to say thank you.'],
+ ['popular','adj.','인기 있는','K-pop is popular around the world.'],
+ ['prefer','v.','선호하다','I prefer tea to coffee.'],
+ ['prepare','v.','준비하다','We prepared for the exam together.'],
+ ['prevent','v.','막다, 예방하다','Washing hands prevents disease.'],
+ ['produce','v.','생산하다','This factory produces cars.'],
+ ['promise','v./n.','약속하다; 약속','I promise to be on time.'],
+ ['protect','v.','보호하다','Helmets protect your head.'],
+ ['proud','adj.','자랑스러운','I am proud of my brother.'],
+ ['purpose','n.','목적','What is the purpose of this trip?'],
+ ['realize','v.','깨닫다','I realized I had left my bag.'],
+ ['recommend','v.','추천하다','Can you recommend a good book?'],
+ ['reduce','v.','줄이다','We should reduce plastic waste.'],
+ ['relax','v.','쉬다, 긴장을 풀다','Relax and take a deep breath.'],
+ ['remind','v.','상기시키다','This song reminds me of my hometown.'],
+ ['require','v.','요구하다, 필요로 하다','The job requires teamwork.'],
+ ['respect','n./v.','존중; 존중하다','We should respect different opinions.'],
+ ['responsible','adj.','책임감 있는','She is responsible for the class pet.'],
+ ['satisfied','adj.','만족한','I\'m satisfied with my score.'],
+ ['serious','adj.','심각한, 진지한','It\'s a serious problem.'],
+ ['similar','adj.','비슷한','Our ideas are similar.'],
+ ['solve','v.','해결하다','Let\'s solve this problem together.'],
+ ['succeed','v.','성공하다','If you try, you will succeed.'],
+ ['suggest','v.','제안하다','I suggest we start early.'],
+ ['support','v./n.','지지하다; 지원','My parents support my dream.'],
+ ['surround','v.','둘러싸다','Mountains surround the village.'],
+ ['talent','n.','재능','She has a talent for drawing.'],
+ ['traditional','adj.','전통적인','Hanbok is traditional Korean clothing.'],
+ ['unique','adj.','독특한, 유일한','Everyone has a unique voice.'],
+ ['valuable','adj.','귀중한','Time is the most valuable thing.'],
+ ['various','adj.','다양한','The store sells various snacks.'],
+ ['volunteer','n./v.','자원봉사자; 자원하다','I volunteer at an animal shelter.'],
+ ['wonder','v.','궁금해하다','I wonder what she is doing now.'],
+ ['worth','adj.','~할 가치가 있는','The movie is worth watching.'],
+ ['ambitious','adj.','야심 있는','He has an ambitious plan for the future.'],
+ ['sincere','adj.','진심 어린','Please accept my sincere apology.']
+];
+
+/* Grammar: [question with ___, options[4], answerIndex, explanation] */
+const GRAMMAR=[
+ ['She ___ to school every day.',['go','goes','going','gone'],1,'3인칭 단수 주어 + 현재형 동사에는 -s/-es를 붙입니다.'],
+ ['There ___ many books on the desk.',['is','am','are','be'],2,'복수 명사(books)이므로 There are.'],
+ ['I ___ TV when my mom came home.',['watch','watched','was watching','have watched'],2,'과거의 한 시점에 진행 중이던 동작 → 과거진행형.'],
+ ['He has lived in Seoul ___ 2015.',['for','since','during','from'],1,'since + 시점, for + 기간.'],
+ ['This is the boy ___ won the contest.',['which','whose','who','whom'],2,'사람 선행사 + 주격 관계대명사 who.'],
+ ['If it ___ tomorrow, we will stay home.',['rains','will rain','rained','raining'],0,'조건절(if)에서는 미래를 현재형으로 씁니다.'],
+ ['She is ___ than her sister.',['tall','taller','tallest','more tall'],1,'than이 있으면 비교급.'],
+ ['I enjoy ___ to music.',['listen','to listen','listening','listened'],2,'enjoy는 동명사를 목적어로 취합니다.'],
+ ['I want ___ a doctor.',['be','to be','being','been'],1,'want는 to부정사를 목적어로 취합니다.'],
+ ['The letter ___ by Tom yesterday.',['wrote','was written','is writing','has written'],1,'수동태: be + p.p.'],
+ ['You ___ wear a helmet when you ride a bike.',['should','can\'t','may not','would'],0,'충고·의무는 should.'],
+ ['My brother is good ___ playing soccer.',['in','on','at','for'],2,'be good at ~: ~을 잘하다'],
+ ['Let me know ___ you arrive.',['which','when','what','who'],1,'접속사 when: ~할 때'],
+ ['I have never ___ sushi before.',['eat','ate','eaten','eating'],2,'현재완료: have + p.p. (eat-ate-eaten)'],
+ ['She asked me ___ I was okay.',['that','if','what','which'],1,'간접의문문(의문사가 없을 때): if/whether'],
+ ['The movie was ___ boring that I fell asleep.',['very','too','so','such'],2,'so + 형용사 + that ~: 너무 ~해서 …하다'],
+ ['If I ___ a bird, I would fly to you.',['am','was','were','be'],2,'가정법 과거에서 be동사는 were.'],
+ ['This is the house ___ I was born.',['which','where','when','that'],1,'장소 선행사 + 관계부사 where.'],
+ ['He made me ___ the dishes.',['wash','to wash','washing','washed'],0,'사역동사 make + 목적어 + 동사원형'],
+ ['I saw him ___ the street.',['cross','to cross','crossed','crosses'],0,'지각동사 see + 목적어 + 동사원형(또는 -ing)'],
+ ['___ the rain, the game went on.',['Despite','Although','Because','Even though'],0,'명사(the rain) 앞에는 전치사 despite.'],
+ ['Neither Tom nor I ___ ready.',['am','is','are','be'],0,'neither A nor B: 동사는 B(I)에 일치.'],
+ ['It was ___ a hot day that we went swimming.',['so','such','very','too'],1,'such + a + 형용사 + 명사 + that'],
+ ['She told me ___ late again.',['not be','not to be','to not being','don\'t be'],1,'to부정사의 부정: not to + 동사원형'],
+ ['The book ___ on the table is mine.',['lie','lying','lain','lies'],1,'현재분사가 명사를 뒤에서 수식: lying on the table'],
+ ['I wish I ___ taller.',['am','were','be','will be'],1,'I wish + 가정법 과거(were)'],
+ ['Not only he but also I ___ wrong.',['am','is','are','were'],0,'not only A but also B: 동사는 B에 일치.'],
+ ['___ English every day, you will improve.',['Study','Studying','Studied','To studying'],1,'분사구문: If you study ~ → Studying ~'],
+ ['He is the ___ student in our class.',['smart','smarter','smartest','more smart'],2,'the + 최상급 + in 범위'],
+ ['Would you mind ___ the window?',['open','to open','opening','opened'],2,'mind는 동명사를 목적어로 취합니다.'],
+ ['Hardly ___ he arrived when it started to rain.',['has','had','did','was'],1,'Hardly had + 주어 + p.p. when ~ (부정어 도치)'],
+ ['The number of students ___ increasing.',['is','are','be','were'],0,'The number of ~ 는 단수 취급.'],
+ ['I\'m looking forward to ___ you.',['see','seeing','saw','be seen'],1,'look forward to + 동명사 (to는 전치사)'],
+ ['She has been ___ for three hours.',['study','studied','studying','studies'],2,'현재완료진행: have been + -ing'],
+ ['He spoke ___ that everyone understood.',['clear','clearly','more clear','clearness'],1,'동사(spoke)를 꾸미는 부사 clearly'],
+ ['___ you help me with my homework?',['Could','Should','Must','Ought'],0,'공손한 부탁: Could you ~?'],
+ ['The pizza ___ by the kids in five minutes.',['ate','was eaten','is eating','eaten'],1,'수동태 과거: was eaten'],
+ ['I don\'t know what ___ next.',['do','to do','doing','did'],1,'의문사 + to부정사: what to do'],
+ ['It is important ___ you to sleep well.',['of','for','to','with'],1,'It is + 형용사 + for + 사람 + to부정사 (성격 형용사가 아닐 때 for)'],
+ ['She is used to ___ early.',['get up','getting up','got up','gets up'],1,'be used to + -ing: ~에 익숙하다']
+];
+
+/* Irregular verbs: [base, past, pp, meaning] */
+const IRREG=[
+ ['be','was/were','been','~이다'],['become','became','become','~이 되다'],['begin','began','begun','시작하다'],['break','broke','broken','깨다'],['bring','brought','brought','가져오다'],['build','built','built','짓다'],['buy','bought','bought','사다'],['catch','caught','caught','잡다'],['choose','chose','chosen','고르다'],['come','came','come','오다'],
+ ['cost','cost','cost','비용이 들다'],['cut','cut','cut','자르다'],['do','did','done','하다'],['draw','drew','drawn','그리다'],['drink','drank','drunk','마시다'],['drive','drove','driven','운전하다'],['eat','ate','eaten','먹다'],['fall','fell','fallen','떨어지다'],['feel','felt','felt','느끼다'],['find','found','found','찾다'],
+ ['fly','flew','flown','날다'],['forget','forgot','forgotten','잊다'],['get','got','gotten','얻다'],['give','gave','given','주다'],['go','went','gone','가다'],['grow','grew','grown','자라다'],['have','had','had','가지다'],['hear','heard','heard','듣다'],['hide','hid','hidden','숨다'],['hold','held','held','잡다, 열다'],
+ ['keep','kept','kept','유지하다'],['know','knew','known','알다'],['leave','left','left','떠나다'],['lose','lost','lost','잃다'],['make','made','made','만들다'],['meet','met','met','만나다'],['pay','paid','paid','지불하다'],['put','put','put','놓다'],['read','read','read','읽다'],['ride','rode','ridden','타다'],
+ ['run','ran','run','달리다'],['say','said','said','말하다'],['see','saw','seen','보다'],['sing','sang','sung','노래하다'],['sit','sat','sat','앉다'],['sleep','slept','slept','자다'],['speak','spoke','spoken','말하다'],['swim','swam','swum','수영하다'],['take','took','taken','가져가다'],['teach','taught','taught','가르치다'],
+ ['tell','told','told','말해주다'],['think','thought','thought','생각하다'],['throw','threw','thrown','던지다'],['wear','wore','worn','입다'],['win','won','won','이기다'],['write','wrote','written','쓰다']
+];
+
+/* Reading passages: {title, level, text, qs:[[q, opts, ans]]} */
+const READING=[
+ {title:'A Letter from Camp',level:'중1~중2',text:`Dear Mom and Dad,\nCamp is great! Every morning we wake up at seven and swim in the lake. The water is cold, but I love it. In the afternoon, we learn to make a fire and cook. Yesterday my team won the canoe race. I am a little tired, but very happy. I miss your cooking!\n\nLove,\nMinji`,
+  qs:[['What does Minji do every morning?',['She cooks','She swims in the lake','She rides a canoe','She writes letters'],1],['How does Minji feel?',['Bored','Sad','Tired but happy','Angry'],2],['What did Minji\'s team win?',['A swimming race','A cooking contest','A canoe race','A fire-making game'],2]]},
+ {title:'Why Do We Yawn?',level:'중2~중3',text:`Everyone yawns, but scientists still do not fully understand why. One idea is that yawning cools the brain. When we are tired, our brain gets a little warmer, and a deep breath of cool air may help. Another idea is that yawning helps us stay alert. Yawning is also contagious: when you see someone yawn, you often yawn too. This may be a way that humans share feelings with each other.`,
+  qs:[['What is one idea about why we yawn?',['It makes us hungry','It cools the brain','It helps us sleep','It cleans the lungs'],1],['What does "contagious" mean here?',['Dangerous','Spreading from one person to another','Very loud','Difficult to stop'],1],['What is the main idea?',['Yawning is bad for you','Scientists have several ideas about yawning','You should not yawn in class','Yawning only happens at night'],1]]},
+ {title:'The Boy Who Planted Trees',level:'중3~고1',text:`When Felix was nine, he learned in school that the Earth was losing its forests. Instead of just feeling sad, he made a plan. He asked his classmates to plant one million trees in their country. Many adults laughed, but Felix kept going. He gave speeches, wrote letters, and planted trees himself. Years later, his group had planted more than 14 billion trees around the world. Felix says, "A single mosquito can do nothing against a rhino. But a thousand mosquitoes can make it change direction."`,
+  qs:[['What did Felix do after learning about the forests?',['He cried','He made a plan to plant trees','He moved to another country','He gave up school'],1],['How did many adults react at first?',['They helped right away','They laughed','They were angry','They planted trees'],1],['What does the mosquito sentence mean?',['Mosquitoes are strong','Rhinos are slow','Many small efforts together can create big change','Children should not fight'],2]]},
+ {title:'Fast Fashion',level:'고1~고2',text:`Fast fashion means producing cheap clothes quickly to follow the latest trends. It sounds good for shoppers, but it has hidden costs. Factories use huge amounts of water, and many clothes are worn only a few times before being thrown away. The workers who make these clothes often receive very low wages. Some people now choose "slow fashion": buying fewer, better-made clothes and wearing them longer. The choice we make at the store affects people and places we will never see.`,
+  qs:[['What is fast fashion?',['Clothes made by hand','Cheap clothes produced quickly to follow trends','Expensive designer clothes','Clothes for athletes'],1],['Which is NOT a hidden cost mentioned?',['Water use','Low wages','High prices for shoppers','Clothes thrown away'],2],['What is "slow fashion"?',['Wearing old clothes only','Buying fewer, better clothes and keeping them longer','Making your own clothes','Never buying clothes'],1]]},
+ {title:'The Spotlight Effect',level:'고2~고3',text:`Have you ever worn a strange shirt and felt that everyone was staring at you? Psychologists call this the "spotlight effect." In one study, students were asked to wear an embarrassing T-shirt into a room full of people. Afterward, they guessed that about half of the people had noticed the shirt. In reality, fewer than a quarter had. We overestimate how much others pay attention to us because we are the center of our own world, not theirs. Remembering this can make social situations far less stressful.`,
+  qs:[['What is the spotlight effect?',['Feeling that others notice us more than they actually do','A stage light in theaters','A fear of bright lights','A way to become popular'],0],['In the study, how many people actually noticed the shirt?',['About half','More than half','Fewer than a quarter','Everyone'],2],['Why do we overestimate others\' attention?',['Because people are rude','Because we are the center of our own world','Because shirts are important','Because studies are wrong'],1]]},
+ {title:'Learning from Failure',level:'고3',text:`Thomas Edison reportedly tested thousands of materials before finding one that worked as a light bulb filament. When asked about his failures, he answered that he had not failed; he had simply found thousands of ways that did not work. This way of thinking is now called a "growth mindset." People with a growth mindset believe ability can be developed through effort. Research shows that students who hold this belief recover from poor grades more quickly and take on harder problems, because they see mistakes as information rather than as judgments of their worth.`,
+  qs:[['How did Edison describe his failures?',['As a waste of time','As ways that did not work','As other people\'s fault','As proof he should quit'],1],['What do people with a growth mindset believe?',['Ability is fixed at birth','Ability can be developed through effort','Only talent matters','Mistakes should be hidden'],1],['Why do such students take on harder problems?',['They are smarter','They see mistakes as information','Teachers force them','They want higher grades only'],1]]}
+];
+
+/* Everyday phrases: [situation, english, korean] */
+const PHRASES=[
+ ['인사','How\'s it going?','잘 지내?'],['인사','Long time no see!','오랜만이야!'],['인사','Nice to meet you.','만나서 반가워.'],
+ ['교실','Could you say that again, please?','다시 한 번 말씀해 주시겠어요?'],['교실','What does this word mean?','이 단어는 무슨 뜻이에요?'],['교실','May I go to the restroom?','화장실에 가도 될까요?'],['교실','I\'m not sure I understand.','잘 이해가 안 돼요.'],['교실','Sorry I\'m late.','늦어서 죄송해요.'],
+ ['식당','Can I get the menu, please?','메뉴판 주시겠어요?'],['식당','I\'d like to order, please.','주문할게요.'],['식당','Could I have the check?','계산서 주시겠어요?'],['식당','Is this spicy?','이거 매워요?'],
+ ['쇼핑','How much is this?','이거 얼마예요?'],['쇼핑','Do you have this in a bigger size?','더 큰 사이즈 있어요?'],['쇼핑','I\'m just looking, thanks.','그냥 구경 중이에요.'],['쇼핑','Can I try this on?','입어 봐도 될까요?'],
+ ['길 찾기','Excuse me, where is the subway station?','실례지만 지하철역이 어디예요?'],['길 찾기','Go straight and turn left.','직진하다가 왼쪽으로 꺾으세요.'],['길 찾기','Is it far from here?','여기서 멀어요?'],
+ ['감정','I\'m so excited!','너무 신나!'],['감정','That\'s a relief.','다행이다.'],['감정','I\'m a bit nervous.','조금 긴장돼.'],['감정','It\'s not a big deal.','별일 아니야.'],
+ ['의견','I think so, too.','나도 그렇게 생각해.'],['의견','I\'m afraid I disagree.','미안하지만 생각이 달라.'],['의견','That makes sense.','일리가 있네.'],['의견','What do you think?','넌 어떻게 생각해?'],
+ ['부탁','Could you do me a favor?','부탁 하나 해도 될까?'],['부탁','Would you mind helping me?','도와주실 수 있을까요?'],['부탁','No problem at all.','전혀 문제없어.']
+];
+
+/* Sentences for scramble & dictation */
+const SENTENCES=[
+ 'I have been studying English for three years.','She usually goes to bed at ten o\'clock.','The museum is closed on Mondays.','What would you like to drink?','He is taller than his older brother.','We are going to visit our grandparents this weekend.','Could you tell me how to get to the library?','If it rains tomorrow, the picnic will be canceled.','My favorite season is autumn because of the colorful leaves.','There are many ways to learn a new language.',
+ 'I forgot to bring my umbrella this morning.','The teacher asked us to be quiet.','Reading books makes you smarter.','Have you ever been to Jeju Island?','The children were playing in the park.','It is important to eat breakfast every day.','She has lived in Busan since she was five.','Turn off the lights when you leave the room.','We should protect animals in danger.','Nobody knows what will happen next.'
+];
+
+/* Word of the day pool (short, inspiring) */
+const DAILY=[
+ ['Practice makes perfect.','연습이 완벽을 만든다.'],['Every day is a new beginning.','매일이 새로운 시작이다.'],['Little by little, one travels far.','조금씩 가면 멀리 간다.'],['Mistakes are proof that you are trying.','실수는 네가 노력하고 있다는 증거다.'],['Believe you can and you\'re halfway there.','할 수 있다고 믿으면 이미 절반은 온 것이다.'],['Don\'t watch the clock; do what it does. Keep going.','시계를 보지 말고 시계처럼 계속 가라.'],['Reading is to the mind what exercise is to the body.','독서는 정신에게 운동과 같다.']
+];
+</script>
+<script>
+/* ================= UTIL ================= */
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const pick=(a,n)=>shuffle(a).slice(0,n);
+const fmt=t=>{const d=new Date(t);return `${d.getMonth()+1}/${d.getDate()} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`};
+const today=()=>new Date().toDateString();
+const uid=()=>Math.random().toString(36).slice(2,9);
+const store={get(k,d){try{const v=localStorage.getItem('ec.'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('ec.'+k,JSON.stringify(v))}catch(e){}},del(k){try{localStorage.removeItem('ec.'+k)}catch(e){}}};
+let toastT;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('on'),2200)}
+async function sha(s){try{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}catch(e){return null}}
+function speak(text,rate){try{if(!('speechSynthesis' in window)){toast('이 브라우저는 음성 재생을 지원하지 않아요');return}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=rate||0.95;const v=speechSynthesis.getVoices().find(v=>/en[-_]US/i.test(v.lang));if(v)u.voice=v;speechSynthesis.speak(u)}catch(e){}}
+const norm=s=>s.toLowerCase().replace(/[^a-z0-9' ]/g,' ').replace(/\s+/g,' ').trim();
+function similarity(a,b){a=norm(a).split(' ').filter(Boolean);b=norm(b).split(' ').filter(Boolean);if(!a.length)return 0;let m=0;const used=new Set();a.forEach(w=>{const i=b.findIndex((x,i)=>x===w&&!used.has(i));if(i>-1){m++;used.add(i)}});return Math.round(m/Math.max(a.length,b.length)*100)}
+function diffWords(target,typed){const t=norm(target).split(' '),u=norm(typed).split(' ');return t.map((w,i)=>u[i]===w?`<span style="color:var(--good)">${esc(w)}</span>`:`<span class="hl" style="color:var(--bad)">${esc(w)}</span>`).join(' ')}
+function copy(text){navigator.clipboard.writeText(text).then(()=>toast('복사했어요')).catch(()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('복사했어요')}catch(e){toast('복사 실패: 직접 선택해서 복사하세요')}ta.remove()})}
+const allVocab=()=>VOCAB.concat(store.get('bank.vocab',[]));
+const allGrammar=()=>GRAMMAR.concat(store.get('bank.grammar',[]));
+
+/* ================= SESSION ================= */
+let S=store.get('session',{role:null,student:null,grade:'m1',tab:'home'});
+function save(){store.set('session',S)}
+function logAct(type,detail,score,extra){if(S.role!=='student')return;const L=store.get('log',[]);L.push(Object.assign({t:Date.now(),s:S.student.name,n:S.student.no,g:S.grade,type,detail,score:score==null?null:score},extra||{}));if(L.length>5000)L.splice(0,L.length-5000);store.set('log',L);const st=store.get('students',{});st[S.student.name+'#'+S.student.no]={name:S.student.name,no:S.student.no,g:S.grade,last:Date.now()};store.set('students',st)}
+const myLog=()=>store.get('log',[]).filter(l=>l.s===S.student.name&&l.n===S.student.no);
+function logout(){if(S.role==='student')logAct('퇴장','학생 퇴장');S={role:null,student:null,grade:'m1',tab:'home'};save();render()}
+
+/* ================= GATE ================= */
+function renderGate(){const d=DAILY[new Date().getDate()%DAILY.length];
+ $('#app').innerHTML=`<div class="gate"><div class="box" style="padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))">
+ <div class="row" style="justify-content:space-between;align-items:flex-end;margin-bottom:6px"><div><div class="eyebrow">${esc(TEACHER_NAME)}과 함께하는</div><h1 style="font-size:30px;font-weight:800;margin-top:4px">영어 교실</h1></div><div class="mark" style="width:48px;height:48px;font-size:30px">E</div></div>
+ <p class="hero-word" style="margin-top:14px">${esc(d[0])}</p><p class="muted" style="margin-top:6px">${esc(d[1])}</p>
+ <div class="roles">
+  <div class="role" id="rStudent"><div class="big">🎒</div><h3>학생으로 입장</h3><p>이름·번호·학년만 적으면 바로 시작해요. 단어·문법·듣기·말하기·독해 기록이 ${esc(TEACHER_NAME)}께 전달됩니다.</p><form id="fStudent"><div class="row"><input type="text" id="sName" placeholder="이름" required style="flex:1;min-width:100px"><input type="number" id="sNo" placeholder="번호" min="1" max="99" required style="width:90px"></div><select id="sGrade">${GRADES.map(g=>`<option value="${g[0]}">${g[1]}</option>`).join('')}</select><button class="pri" type="submit">입장하기 →</button></form></div>
+  <div class="role" id="rTeacher"><div class="big">👨‍🏫</div><h3>${esc(TEACHER_NAME)}으로 입장</h3><p>아이디와 비밀번호가 필요해요. 학생 통계, 시험 범위, 공지·과제, 제출물 피드백, 채점을 관리합니다.</p><form id="fTeacher"><input type="text" id="tId" placeholder="아이디" autocomplete="username"><input type="password" id="tPw" placeholder="비밀번호" autocomplete="current-password"><button class="pri" type="submit">로그인 →</button><div id="tErr" class="small" style="color:var(--bad);min-height:18px"></div></form></div>
+ </div><p class="small muted" style="margin-top:22px">최근 학생: ${Object.values(store.get('students',{})).sort((a,b)=>b.last-a.last).slice(0,5).map(s=>esc(s.name)).join(', ')||'아직 없음'}</p></div></div>`;
+ const last=store.get('lastStudent');if(last){$('#sName').value=last.name;$('#sNo').value=last.no;$('#sGrade').value=last.g}
+ $('#fStudent').onsubmit=e=>{e.preventDefault();const name=$('#sName').value.trim(),no=+$('#sNo').value;if(!name||!no){toast('이름과 번호를 입력하세요');return}S={role:'student',student:{name,no},grade:$('#sGrade').value,tab:'home'};store.set('lastStudent',{name,no,g:S.grade});save();logAct('입장','학생 입장');render()};
+ $('#fTeacher').onsubmit=async e=>{e.preventDefault();const id=$('#tId').value.trim(),pw=$('#tPw').value;const hi=await sha(id),hp=await sha(pw);if(hi===null){$('#tErr').textContent='이 브라우저에서는 로그인 기능을 쓸 수 없습니다(https 필요).';return}
+  if(hi===TEACHER_ID_HASH&&hp===TEACHER_PW_HASH){S={role:'teacher',student:null,grade:'m1',tab:'dash'};save();toast(TEACHER_NAME+', 환영합니다');render()}else{$('#tErr').textContent='아이디 또는 비밀번호가 맞지 않습니다.';$('#tPw').value=''}}}
+
+/* ================= SHELL ================= */
+const STUDENT_TABS=[['home','🏠 홈'],['range','📌 시험 범위'],['vocab','📖 단어'],['grammar','🧩 문법'],['listen','🎧 듣기'],['speak','🎤 말하기'],['read','📚 독해'],['games','🎮 게임'],['write','🖋️ 영작'],['notice','📢 공지·과제'],['my','📈 내 기록']];
+const TEACHER_TABS=[['dash','📊 학생 통계'],['students','👥 학생별 보기'],['range','📌 시험 범위 편집'],['notice','📢 공지·과제 관리'],['submit','📥 제출물'],['grade','📝 수행평가 채점'],['bank','✍️ 문제 등록'],['pick','🎲 뽑기·타이머'],['preview','🎒 학생 화면 보기'],['data','💾 기록 관리']];
+function render(){if(!S.role){renderGate();return}
+ const tabs=S.role==='teacher'?TEACHER_TABS:STUDENT_TABS;if(!tabs.some(t=>t[0]===S.tab))S.tab=tabs[0][0];
+ $('#app').innerHTML=`<header class="top"><div class="in"><div class="brand"><div class="mark">E</div><div><h1>${esc(TEACHER_NAME)} 영어 교실</h1><small>${S.role==='teacher'?'선생님 모드':gname(S.grade)}</small></div></div>
+  ${S.role==='student'?`<select id="gradeSel" style="width:auto">${GRADES.map(g=>`<option value="${g[0]}" ${g[0]===S.grade?'selected':''}>${g[1]}</option>`).join('')}</select>`:''}
+  <div class="who"><span class="chip ${S.role==='teacher'?'t':'s'}">${S.role==='teacher'?'👨‍🏫 '+esc(TEACHER_NAME):'🎒 '+esc(S.student.name)+' ('+S.student.no+'번)'}</span><button class="sm" id="logout">나가기</button></div></div></header>
+  <div class="wrap"><nav class="tabs">${tabs.map(t=>`<button class="${t[0]===S.tab?'on':''}" data-tab="${t[0]}">${t[1]}</button>`).join('')}</nav><section id="content"></section><div class="footer">${esc(TEACHER_NAME)} 영어 교실 · Learn a little every day ✦</div></div>`;
+ $('#logout').onclick=logout;$$('[data-tab]').forEach(b=>b.onclick=()=>{S.tab=b.dataset.tab;S.sub=null;save();render()});const gs=$('#gradeSel');if(gs)gs.onchange=e=>{S.grade=e.target.value;save();render()};
+ const map=S.role==='teacher'?{dash:tDash,students:tStudents,range:tRange,notice:tNotice,submit:tSubmit,grade:tGrade,bank:tBank,pick:tPick,preview:tPreview,data:tData}:{home:sHome,range:sRange,vocab:sVocab,grammar:sGrammar,listen:sListen,speak:sSpeak,read:sRead,games:sGames,write:sWrite,notice:sNotice,my:sMy};
+ map[S.tab]($('#content'))}
+function requireTeacher(){if(S.role!=='teacher'){toast('선생님만 사용할 수 있습니다');return false}return true}
+const rangeOf=g=>store.get('range.'+g,DEFAULT_RANGE[g]);
+function subTabs(el,items,cur,on){el.innerHTML=`<div class="tabs" style="margin-bottom:14px">${items.map(i=>`<button class="${i[0]===cur?'on':''}" data-sub="${i[0]}">${i[1]}</button>`).join('')}</div><div id="subbox"></div>`;$$('[data-sub]').forEach(b=>b.onclick=()=>{S.sub=b.dataset.sub;save();on(b.dataset.sub,$('#subbox'))});on(cur,$('#subbox'))}
+function quizShell(el,title,total,getQ,onDone){let i=0,score=0,wrong=[];const step=()=>{if(i>=total){el.innerHTML=`<div class="card" style="text-align:center"><div class="eyebrow">${esc(title)} 결과</div><div class="big-score" style="margin:10px 0;color:var(--accent)">${score}<span style="font-size:20px;color:var(--muted)">/${total}</span></div><p class="muted">${score===total?'완벽해요! 🎉':score>=total*0.7?'잘했어요! 틀린 것만 다시 보기 👀':'한 번 더 풀어 보면 확실히 늘어요 💪'}</p>${wrong.length?`<div style="text-align:left;margin-top:16px" class="list">${wrong.map(w=>`<div class="item"><div><b>${esc(w.q)}</b><div class="small muted">정답: ${esc(w.a)} · ${esc(w.e||'')}</div></div></div>`).join('')}</div>`:''}<div class="row" style="justify-content:center;margin-top:16px"><button class="pri" id="again">다시 풀기</button></div></div>`;$('#again').onclick=()=>{i=0;score=0;wrong=[];step()};onDone(score);return}
+  const q=getQ(i);el.innerHTML=`<div class="card"><div class="row" style="justify-content:space-between"><span class="eyebrow">${esc(title)} · ${i+1} / ${total}</span><span class="pill acc">${score}점</span></div><div class="prog" style="margin:10px 0 16px"><i style="width:${i/total*100}%"></i></div>${q.html}<div class="opt" id="opts">${q.opts.map((o,k)=>`<button data-k="${k}">${esc(o)}</button>`).join('')}</div><div id="exp" class="small" style="margin-top:12px;min-height:20px"></div><div class="row" style="justify-content:flex-end;margin-top:8px"><button class="pri" id="next" hidden>다음 →</button></div></div>`;
+  if(q.after)q.after();
+  $$('#opts button').forEach(b=>b.onclick=()=>{const k=+b.dataset.k;$$('#opts button').forEach(x=>{x.disabled=true;if(+x.dataset.k===q.ans)x.classList.add('ok')});if(k===q.ans){score++;$('#exp').innerHTML='<span style="color:var(--good)">정답! ✓</span> '+esc(q.exp||'')}else{b.classList.add('no');wrong.push({q:q.text,a:q.opts[q.ans],e:q.exp});$('#exp').innerHTML='<span style="color:var(--bad)">아쉬워요.</span> '+esc(q.exp||'')}$('#next').hidden=false;$('#next').focus()});$('#next').onclick=()=>{i++;step()}};step()}
+
+/* ================= STUDENT ================= */
+function sHome(el){const notices=store.get('notices',[]).filter(n=>!n.g||n.g===S.grade).slice(-2).reverse();const L=myLog();const r=rangeOf(S.grade);const done=store.get('rangeDone.'+S.grade+'.'+S.student.no,[]);const scored=L.filter(l=>l.score!=null);const d=DAILY[new Date().getDate()%DAILY.length];const w=allVocab()[new Date().getDate()%allVocab().length];const streak=(()=>{const days=new Set(L.map(l=>new Date(l.t).toDateString()));let n=0;for(let i=0;i<30;i++){const dd=new Date();dd.setDate(dd.getDate()-i);if(days.has(dd.toDateString()))n++;else break}return n})();
+ el.innerHTML=`${notices.length?`<div class="notice" style="margin-bottom:14px"><b>📢 ${esc(notices[0].title)}</b><div class="small" style="white-space:pre-wrap;margin-top:4px">${esc(notices[0].body)}</div></div>`:''}
+ <div class="card"><div class="eyebrow">Today's sentence</div><p class="hero-word" style="margin-top:6px">${esc(d[0])}</p><p class="muted small" style="margin-top:4px">${esc(d[1])}</p>
+  <div class="row" style="margin-top:14px;align-items:stretch"><div class="stat"><b class="num">${L.length}</b><span>내 활동 수</span></div><div class="stat"><b class="num">${done.length}/${r.units.length}</b><span>시험 범위 체크</span></div><div class="stat"><b class="num">${scored.length?Math.round(scored.reduce((a,l)=>a+l.score,0)/scored.length):'–'}</b><span>평균 점수</span></div><div class="stat"><b class="num">${streak}</b><span>연속 학습일 🔥</span></div></div></div>
+ <div class="card"><div class="row" style="justify-content:space-between"><div><div class="eyebrow">Word of the day</div><div class="word" style="margin-top:4px">${esc(w[0])} <span class="pos">${esc(w[1])}</span></div><div>${esc(w[2])}</div><div class="serif muted" style="margin-top:4px">${esc(w[3])}</div></div><button class="sm" id="sayW">🔊 듣기</button></div></div>
+ <div class="menu">${[['range','📌','시험 범위','단원별 체크 + 공부 팁'],['vocab','📖','단어','카드 100개·뜻·스펠링 테스트'],['grammar','🧩','문법','문법 퀴즈·불규칙 동사'],['listen','🎧','듣기','받아쓰기·속도 조절'],['speak','🎤','말하기','문장 따라 말하기·회화 표현'],['read','📚','독해','지문 6편 + 이해 문제'],['games','🎮','게임','문장 배열·60초 스피드'],['write','🖋️','영작','글쓰기 점검 후 제출'],['notice','📢','공지·과제','선생님 과제 확인'],['my','📈','내 기록','활동 코드 제출']].map(m=>`<button data-go="${m[0]}"><span class="ic">${m[1]}</span><b>${m[2]}</b><span>${m[3]}</span></button>`).join('')}</div>`;
+ $('#sayW').onclick=()=>speak(w[0]+'. '+w[3]);$$('[data-go]').forEach(b=>b.onclick=()=>{S.tab=b.dataset.go;S.sub=null;save();render()})}
+
+function sRange(el){const r=rangeOf(S.grade);const k='rangeDone.'+S.grade+'.'+S.student.no;const done=store.get(k,[]);
+ el.innerHTML=`<div class="card"><div class="eyebrow">${gname(S.grade)}</div><h2 style="margin-top:4px">${esc(r.title)}</h2><div class="prog" style="margin:12px 0"><i style="width:${done.length/r.units.length*100}%"></i></div><div class="list">${r.units.map((u,i)=>`<label class="item ${done.includes(i)?'on':''}"><input type="checkbox" data-i="${i}" ${done.includes(i)?'checked':''}><div><b>${esc(u[0])}</b><div class="small muted">${esc(u[1])}</div></div></label>`).join('')}</div></div>
+ <div class="card"><h3>📝 ${esc(TEACHER_NAME)}의 공부 팁</h3><ol style="margin:10px 0 0;padding-left:20px">${r.tips.map(t=>`<li style="margin-bottom:6px">${esc(t)}</li>`).join('')}</ol></div>`;
+ $$('input[data-i]').forEach(c=>c.onchange=()=>{const i=+c.dataset.i;const d=store.get(k,[]);const idx=d.indexOf(i);if(c.checked&&idx<0)d.push(i);if(!c.checked&&idx>-1)d.splice(idx,1);store.set(k,d);logAct('시험범위',(c.checked?'완료: ':'해제: ')+r.units[i][0]);sRange(el)})}
+
+function sVocab(el){subTabs(el,[['cards','🃏 단어 카드'],['mean','✅ 뜻 고르기'],['spell','⌨️ 스펠링'],['known','📒 아는 단어']],S.sub||'cards',(sub,box)=>{
+ const V=allVocab();const kk='known.'+S.student.no;const known=store.get(kk,[]);
+ if(sub==='cards'){let i=store.get('cardIdx.'+S.student.no,0)%V.length,flip=false;const draw=()=>{const w=V[i];box.innerHTML=`<div class="row" style="justify-content:space-between;margin-bottom:10px"><span class="eyebrow">${i+1} / ${V.length}</span><span class="pill ${known.includes(w[0])?'good':''}">${known.includes(w[0])?'알아요 ✓':'학습 중'}</span></div><div class="flash ${flip?'flip':''}" id="fl"><div class="inner"><div class="face"><div class="word">${esc(w[0])}</div><div class="pos">${esc(w[1])}</div><div class="small muted">카드를 눌러 뜻 보기</div></div><div class="face back"><div style="font-size:22px;font-weight:700">${esc(w[2])}</div><div class="serif" style="font-size:18px;margin-top:4px">${esc(w[3])}</div></div></div></div><div class="row" style="justify-content:center;margin-top:14px"><button id="prev">← 이전</button><button id="say">🔊 발음</button><button class="${known.includes(w[0])?'':'pri'}" id="know">${known.includes(w[0])?'다시 공부':'알아요 ✓'}</button><button id="nxt">다음 →</button></div>`;
+  $('#fl').onclick=()=>{flip=!flip;$('#fl').classList.toggle('flip',flip)};$('#say').onclick=e=>{e.stopPropagation();speak(w[0])};$('#prev').onclick=()=>{i=(i-1+V.length)%V.length;flip=false;store.set('cardIdx.'+S.student.no,i);draw()};$('#nxt').onclick=()=>{i=(i+1)%V.length;flip=false;store.set('cardIdx.'+S.student.no,i);if(i%10===0)logAct('단어카드','카드 '+i+'장까지 봄');draw()};$('#know').onclick=()=>{const j=known.indexOf(w[0]);if(j>-1)known.splice(j,1);else known.push(w[0]);store.set(kk,known);draw()}};draw()}
+ else if(sub==='mean'){const qs=pick(V,10);quizShell(box,'뜻 고르기',10,i=>{const w=qs[i];const opts=shuffle([w[2],...pick(V.filter(v=>v[0]!==w[0]),3).map(v=>v[2])]);return{text:w[0],html:`<div class="word">${esc(w[0])} <span class="pos">${esc(w[1])}</span></div><p class="muted small">알맞은 뜻은?</p>`,opts,ans:opts.indexOf(w[2]),exp:w[3]}},s=>logAct('단어테스트','뜻 고르기 10문제',s*10))}
+ else if(sub==='spell'){const qs=pick(V,10);let i=0,score=0;const step=()=>{if(i>=10){box.innerHTML=`<div class="card" style="text-align:center"><div class="eyebrow">스펠링 결과</div><div class="big-score" style="margin:10px 0;color:var(--accent)">${score}<span style="font-size:20px;color:var(--muted)">/10</span></div><button class="pri" id="again">다시</button></div>`;$('#again').onclick=()=>{i=0;score=0;step()};logAct('스펠링','스펠링 10문제',score*10);return}
+   const w=qs[i];const hint=w[0][0]+'_'.repeat(w[0].length-1);box.innerHTML=`<div class="card"><div class="row" style="justify-content:space-between"><span class="eyebrow">스펠링 · ${i+1} / 10</span><span class="pill acc">${score}점</span></div><div style="font-size:22px;font-weight:700;margin:14px 0 4px">${esc(w[2])}</div><div class="serif muted">${esc(w[3].replace(new RegExp(w[0],'i'),'_____'))}</div><div class="row" style="margin-top:14px"><span class="kbd" style="font-size:18px;letter-spacing:.2em">${hint}</span><button class="sm" id="say">🔊 듣기</button></div><form id="f" class="row" style="margin-top:12px"><input id="ans" placeholder="영어 단어 입력" autocomplete="off" autocapitalize="off" style="flex:1"><button class="pri" type="submit">확인</button></form><div id="exp" class="small" style="margin-top:10px;min-height:20px"></div></div>`;
+   $('#say').onclick=()=>speak(w[0]);$('#ans').focus();$('#f').onsubmit=e=>{e.preventDefault();const a=$('#ans').value.trim().toLowerCase();if(!a)return;if(a===w[0].toLowerCase()){score++;$('#exp').innerHTML='<span style="color:var(--good)">정답! ✓</span>';setTimeout(()=>{i++;step()},600)}else{$('#exp').innerHTML=`<span style="color:var(--bad)">정답은 <b>${esc(w[0])}</b></span>`;$('#f button').textContent='다음 →';$('#f').onsubmit=ev=>{ev.preventDefault();i++;step()}}}};step()}
+ else{box.innerHTML=`<div class="card"><div class="row" style="justify-content:space-between"><h3>아는 단어 ${known.length} / ${V.length}</h3><button class="sm" id="say">🔊 모르는 단어 듣기</button></div><div class="prog" style="margin:10px 0"><i style="width:${known.length/V.length*100}%"></i></div><div class="tscroll"><table><tr><th>단어</th><th>뜻</th><th></th></tr>${V.map(w=>`<tr><td class="serif" style="font-size:16px">${esc(w[0])}</td><td>${esc(w[2])}</td><td><span class="pill ${known.includes(w[0])?'good':''}">${known.includes(w[0])?'✓':'학습 중'}</span></td></tr>`).join('')}</table></div></div>`;$('#say').onclick=()=>speak(V.filter(w=>!known.includes(w[0])).slice(0,15).map(w=>w[0]).join('. '))}})}
+
+function sGrammar(el){subTabs(el,[['quiz','🧩 문법 퀴즈'],['irreg','🔁 불규칙 동사'],['table','📋 동사표']],S.sub||'quiz',(sub,box)=>{
+ if(sub==='quiz'){const G=allGrammar();const qs=pick(G,10);quizShell(box,'문법 퀴즈',10,i=>{const q=qs[i];return{text:q[0],html:`<div class="serif" style="font-size:22px">${esc(q[0]).replace('___','<span class="kbd" style="font-size:18px">____</span>')}</div>`,opts:q[1],ans:q[2],exp:q[3]}},s=>logAct('문법','문법 퀴즈 10문제',s*10))}
+ else if(sub==='irreg'){const qs=pick(IRREG,10);let i=0,score=0;const step=()=>{if(i>=10){box.innerHTML=`<div class="card" style="text-align:center"><div class="eyebrow">불규칙 동사 결과</div><div class="big-score" style="margin:10px 0;color:var(--accent)">${score}<span style="font-size:20px;color:var(--muted)">/10</span></div><button class="pri" id="again">다시</button></div>`;$('#again').onclick=()=>{i=0;score=0;step()};logAct('불규칙동사','불규칙 동사 10개',score*10);return}
+   const v=qs[i];box.innerHTML=`<div class="card"><div class="row" style="justify-content:space-between"><span class="eyebrow">불규칙 동사 · ${i+1} / 10</span><span class="pill acc">${score}점</span></div><div class="word" style="margin:14px 0 2px">${esc(v[0])}</div><div class="muted">${esc(v[3])}</div><form id="f" style="margin-top:14px"><div class="row"><input id="p1" placeholder="과거형" autocomplete="off" autocapitalize="off" style="flex:1"><input id="p2" placeholder="과거분사" autocomplete="off" autocapitalize="off" style="flex:1"></div><div class="row" style="justify-content:flex-end;margin-top:10px"><button class="pri" type="submit">확인</button></div></form><div id="exp" class="small" style="margin-top:10px;min-height:20px"></div></div>`;
+   $('#p1').focus();$('#f').onsubmit=e=>{e.preventDefault();const a=$('#p1').value.trim().toLowerCase(),b=$('#p2').value.trim().toLowerCase();const ok=a===v[1].toLowerCase()&&b===v[2].toLowerCase();if(ok){score++;$('#exp').innerHTML='<span style="color:var(--good)">정답! ✓</span>';setTimeout(()=>{i++;step()},600)}else{$('#exp').innerHTML=`<span style="color:var(--bad)">정답: <b>${esc(v[0])} – ${esc(v[1])} – ${esc(v[2])}</b></span>`;$('#f button').textContent='다음 →';$('#f').onsubmit=ev=>{ev.preventDefault();i++;step()}}}};step()}
+ else{box.innerHTML=`<div class="card"><h3>불규칙 동사 ${IRREG.length}개</h3><p class="small muted">행을 누르면 발음을 들을 수 있어요.</p><div class="tscroll" style="margin-top:10px"><table><tr><th>원형</th><th>과거</th><th>과거분사</th><th>뜻</th></tr>${IRREG.map(v=>`<tr data-v="${esc(v[0])} ${esc(v[1])} ${esc(v[2])}" style="cursor:pointer"><td class="serif" style="font-size:16px">${esc(v[0])}</td><td>${esc(v[1])}</td><td>${esc(v[2])}</td><td class="muted">${esc(v[3])}</td></tr>`).join('')}</table></div></div>`;$$('tr[data-v]').forEach(r=>r.onclick=()=>speak(r.dataset.v))}})}
+
+function sListen(el){subTabs(el,[['dict','✍️ 받아쓰기'],['words','🔊 단어 듣고 고르기']],S.sub||'dict',(sub,box)=>{
+ if(sub==='dict'){const qs=pick(SENTENCES,5);let i=0,score=0,rate=0.9;const step=()=>{if(i>=5){box.innerHTML=`<div class="card" style="text-align:center"><div class="eyebrow">받아쓰기 결과</div><div class="big-score" style="margin:10px 0;color:var(--accent)">${Math.round(score/5)}<span style="font-size:20px;color:var(--muted)">점</span></div><button class="pri" id="again">다시</button></div>`;$('#again').onclick=()=>{i=0;score=0;step()};logAct('받아쓰기','받아쓰기 5문장',Math.round(score/5));return}
+   const s=qs[i];box.innerHTML=`<div class="card"><div class="row" style="justify-content:space-between"><span class="eyebrow">받아쓰기 · ${i+1} / 5</span><span class="small muted">${s.split(' ').length}단어</span></div><div class="row" style="margin-top:14px"><button class="pri" id="play">▶ 듣기</button><button id="slow">🐢 천천히</button><span class="small muted">몇 번이든 들을 수 있어요</span></div><form id="f" style="margin-top:14px"><textarea id="ans" placeholder="들은 문장을 그대로 적어 보세요" style="min-height:80px" autocapitalize="off"></textarea><div class="row" style="justify-content:flex-end;margin-top:10px"><button class="pri" type="submit">확인</button></div></form><div id="exp" style="margin-top:12px"></div></div>`;
+   $('#play').onclick=()=>speak(s,rate);$('#slow').onclick=()=>speak(s,0.6);setTimeout(()=>speak(s,rate),300);$('#f').onsubmit=e=>{e.preventDefault();const a=$('#ans').value;if(!a.trim())return;const p=similarity(s,a);score+=p;$('#exp').innerHTML=`<div class="row" style="justify-content:space-between"><span class="pill ${p>=80?'good':p>=50?'warn':'bad'}">${p}% 일치</span></div><div class="serif" style="font-size:18px;margin-top:8px">${diffWords(s,a)}</div><div class="row" style="justify-content:flex-end;margin-top:10px"><button class="pri" id="nx">다음 →</button></div>`;$('#f button').disabled=true;$('#nx').onclick=()=>{i++;step()}}};step()}
+ else{const V=allVocab();const qs=pick(V,10);quizShell(box,'듣고 고르기',10,i=>{const w=qs[i];const opts=shuffle([w[0],...pick(V.filter(v=>v[0]!==w[0]),3).map(v=>v[0])]);return{text:w[0],html:`<div class="row"><button class="pri" id="pl">🔊 다시 듣기</button><span class="muted small">들은 단어를 고르세요</span></div>`,opts,ans:opts.indexOf(w[0]),exp:w[2]+' · '+w[3],after:()=>{$('#pl').onclick=()=>speak(w[0]);setTimeout(()=>speak(w[0]),200)}}},s=>logAct('듣기','단어 듣고 고르기 10문제',s*10))}})}
+
+function sSpeak(el){subTabs(el,[['shadow','🎤 따라 말하기'],['phrases','💬 회화 표현'],['role','🎭 역할극']],S.sub||'shadow',(sub,box)=>{
+ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+ if(sub==='shadow'){let i=0;const qs=pick(SENTENCES,5);const results=[];const step=()=>{if(i>=5){const avg=Math.round(results.reduce((a,b)=>a+b,0)/results.length);box.innerHTML=`<div class="card" style="text-align:center"><div class="eyebrow">따라 말하기 결과</div><div class="big-score" style="margin:10px 0;color:var(--accent)">${avg}<span style="font-size:20px;color:var(--muted)">점</span></div><button class="pri" id="again">다시</button></div>`;$('#again').onclick=()=>{i=0;results.length=0;step()};logAct('말하기','따라 말하기 5문장',avg);return}
+   const s=qs[i];box.innerHTML=`<div class="card"><span class="eyebrow">따라 말하기 · ${i+1} / 5</span><div class="passage" style="margin-top:12px;font-size:22px;text-align:center">${esc(s)}</div><div class="row" style="justify-content:center;margin-top:14px"><button id="pl">🔊 먼저 듣기</button><button class="pri" id="rec">${SR?'🎤 녹음하고 말하기':'✓ 소리 내어 읽었어요'}</button></div><div id="exp" style="margin-top:12px;text-align:center;min-height:24px" class="small muted">${SR?'버튼을 누르고 문장을 또렷하게 읽으세요 (마이크 허용 필요)':'이 브라우저는 음성 인식을 지원하지 않아 자기 점검으로 진행해요. 크롬에서 열면 인식됩니다.'}</div></div>`;
+   $('#pl').onclick=()=>speak(s);$('#rec').onclick=()=>{if(!SR){results.push(80);i++;step();return}try{const r=new SR();r.lang='en-US';r.interimResults=false;r.maxAlternatives=1;$('#exp').textContent='듣고 있어요… 🎙️';$('#rec').disabled=true;r.onresult=e=>{const t=e.results[0][0].transcript;const p=similarity(s,t);results.push(p);$('#exp').innerHTML=`<div>인식: <i>${esc(t)}</i></div><div style="margin-top:6px"><span class="pill ${p>=80?'good':p>=50?'warn':'bad'}">${p}% 일치</span></div><div class="row" style="justify-content:center;margin-top:10px"><button id="re">다시 말하기</button><button class="pri" id="nx">다음 →</button></div>`;$('#re').onclick=()=>{results.pop();step()};$('#nx').onclick=()=>{i++;step()}};r.onerror=ev=>{$('#exp').textContent='인식 실패('+ev.error+'). 다시 눌러 보세요.';$('#rec').disabled=false};r.onend=()=>{$('#rec').disabled=false};r.start()}catch(e){$('#exp').textContent='마이크를 사용할 수 없어요.'}}};step()}
+ else if(sub==='phrases'){const cats=[...new Set(PHRASES.map(p=>p[0]))];const cur=S.cat||cats[0];box.innerHTML=`<div class="chips" style="margin-bottom:12px">${cats.map(c=>`<button class="${c===cur?'pri':''}" data-c="${c}">${c}</button>`).join('')}</div><div class="list">${PHRASES.filter(p=>p[0]===cur).map(p=>`<div class="item" style="align-items:center"><div style="flex:1"><div class="en">${esc(p[1])}</div><div class="small muted">${esc(p[2])}</div></div><button class="sm" data-say="${esc(p[1])}">🔊</button></div>`).join('')}</div>`;$$('[data-c]').forEach(b=>b.onclick=()=>{S.cat=b.dataset.c;save();logAct('회화표현','회화 표현 보기: '+S.cat);sSpeak(el)});$$('[data-say]').forEach(b=>b.onclick=()=>speak(b.dataset.say))}
+ else{const scenes=[{t:'식당에서 주문하기',lines:[['A','Hello! Are you ready to order?'],['B','Yes. I\'d like a cheeseburger and a coke, please.'],['A','Would you like fries with that?'],['B','No, thank you. How much is it?'],['A','It\'s eight dollars.']]},{t:'길 묻기',lines:[['A','Excuse me, how can I get to the bus stop?'],['B','Go straight two blocks and turn right.'],['A','Is it far from here?'],['B','No, it takes about five minutes.'],['A','Thank you so much!']]},{t:'새 친구 사귀기',lines:[['A','Hi, I\'m Jun. What\'s your name?'],['B','I\'m Emma. Nice to meet you.'],['A','Where are you from?'],['B','I\'m from Canada. I just moved here.'],['A','Welcome! Let me show you around.']]}];const sc=scenes[S.scene||0];let role=S.role2||'B';
+  box.innerHTML=`<div class="row" style="margin-bottom:12px"><select id="scn" style="width:auto">${scenes.map((s,i)=>`<option value="${i}" ${i===(S.scene||0)?'selected':''}>${s.t}</option>`).join('')}</select><span class="small muted">내 역할:</span><button class="sm ${role==='A'?'pri':''}" data-r="A">A</button><button class="sm ${role==='B'?'pri':''}" data-r="B">B</button><button class="sm" id="playAll">▶ 전체 듣기</button></div><div class="list">${sc.lines.map((l,i)=>`<div class="item ${l[0]===role?'on':''}" style="align-items:center"><span class="pill">${l[0]}</span><div class="en" style="flex:1">${l[0]===role?'<span class="muted small">(내 차례) </span>':''}${esc(l[1])}</div><button class="sm" data-say="${esc(l[1])}">🔊</button></div>`).join('')}</div><p class="small muted" style="margin-top:10px">상대 대사는 🔊를 눌러 듣고, 내 역할(초록)은 소리 내어 말해 보세요.</p>`;
+  $('#scn').onchange=e=>{S.scene=+e.target.value;save();logAct('역할극','역할극: '+scenes[S.scene].t);sSpeak(el)};$$('[data-r]').forEach(b=>b.onclick=()=>{S.role2=b.dataset.r;save();sSpeak(el)});$$('[data-say]').forEach(b=>b.onclick=()=>speak(b.dataset.say));$('#playAll').onclick=()=>{speechSynthesis.cancel();sc.lines.forEach((l,i)=>setTimeout(()=>speak(l[1]),i*2800))}}})}
+
+function sRead(el){const idx=S.sub?+S.sub:null;if(idx===null){el.innerHTML=`<div class="grid">${READING.map((r,i)=>`<button class="card" data-i="${i}" style="text-align:left;padding:18px;display:flex;flex-direction:column;gap:6px;align-items:flex-start"><span class="pill acc">${esc(r.level)}</span><b style="font-size:17px;font-family:var(--serif)">${esc(r.title)}</b><span class="small muted">${r.text.split(' ').length}단어 · 문제 ${r.qs.length}개</span></button>`).join('')}</div>`;$$('[data-i]').forEach(b=>b.onclick=()=>{S.sub=b.dataset.i;save();sRead(el)});return}
+ const r=READING[idx];el.innerHTML=`<button class="sm ghost" id="back">← 지문 목록</button><div class="card" style="margin-top:10px"><div class="row" style="justify-content:space-between"><div><span class="pill acc">${esc(r.level)}</span><h2 style="margin-top:6px">${esc(r.title)}</h2></div><button class="sm" id="rd">🔊 읽어주기</button></div><div class="passage" style="margin-top:12px;white-space:pre-wrap">${esc(r.text)}</div></div><div id="qbox"></div>`;
+ $('#back').onclick=()=>{S.sub=null;save();sRead(el)};$('#rd').onclick=()=>speak(r.text.replace(/\n/g,' '),0.9);quizShell($('#qbox'),r.title,r.qs.length,i=>({text:r.qs[i][0],html:`<div style="font-size:18px;font-weight:600">Q${i+1}. ${esc(r.qs[i][0])}</div>`,opts:r.qs[i][1],ans:r.qs[i][2]}),s=>logAct('독해','독해: '+r.title,Math.round(s/r.qs.length*100)))}
+
+function sGames(el){subTabs(el,[['scramble','🔀 문장 배열'],['speed','⚡ 60초 스피드'],['hang','🔡 단어 맞히기']],S.sub||'scramble',(sub,box)=>{
+ if(sub==='scramble'){const qs=pick(SENTENCES,5);let i=0,score=0;const step=()=>{if(i>=5){box.innerHTML=`<div class="card" style="text-align:center"><div class="eyebrow">문장 배열 결과</div><div class="big-score" style="margin:10px 0;color:var(--accent)">${score}<span style="font-size:20px;color:var(--muted)">/5</span></div><button class="pri" id="again">다시</button></div>`;$('#again').onclick=()=>{i=0;score=0;step()};logAct('문장배열','문장 배열 5문제',score*20);return}
+   const s=qs[i];const words=s.replace(/[.?!]$/,'').split(' ');const end=s.slice(-1);let picked=[];const draw=()=>{box.innerHTML=`<div class="card"><div class="row" style="justify-content:space-between"><span class="eyebrow">문장 배열 · ${i+1} / 5</span><span class="pill acc">${score}점</span></div><p class="small muted" style="margin-top:8px">단어를 순서대로 눌러 문장을 완성하세요.</p><div class="slot" id="slot" style="margin-top:10px">${picked.map((w,k)=>`<button class="sm" data-k="${k}">${esc(w)}</button>`).join('')}${picked.length?`<span class="serif" style="font-size:18px">${end}</span>`:'<span class="small muted">여기에 문장이 만들어져요</span>'}</div><div class="chips" id="chips" style="margin-top:12px">${shuffled.map((w,k)=>`<button data-c="${k}" class="${used.has(k)?'used':''}">${esc(w)}</button>`).join('')}</div><div class="row" style="justify-content:space-between;margin-top:14px"><button id="hint">🔊 힌트 듣기</button><div class="row"><button id="reset">초기화</button><button class="pri" id="chk" ${picked.length===words.length?'':'disabled'}>확인</button></div></div><div id="exp" style="margin-top:10px;min-height:20px"></div></div>`;
+    $$('[data-c]').forEach(b=>b.onclick=()=>{used.add(+b.dataset.c);picked.push(shuffled[+b.dataset.c]);order.push(+b.dataset.c);draw()});$$('#slot [data-k]').forEach(b=>b.onclick=()=>{const k=+b.dataset.k;picked.splice(k,1);used.delete(order[k]);order.splice(k,1);draw()});$('#reset').onclick=()=>{picked=[];used.clear();order.length=0;draw()};$('#hint').onclick=()=>speak(s);$('#chk').onclick=()=>{const ok=picked.join(' ')===words.join(' ');if(ok){score++;$('#exp').innerHTML='<span style="color:var(--good)">정답! ✓</span> '+esc(s)}else $('#exp').innerHTML='<span style="color:var(--bad)">아쉬워요.</span> 정답: '+esc(s);$('#chk').textContent='다음 →';$('#chk').onclick=()=>{i++;step()}}};const shuffled=shuffle(words),used=new Set(),order=[];draw()};step()}
+ else if(sub==='speed'){const V=allVocab();box.innerHTML=`<div class="card" style="text-align:center"><div class="eyebrow">60초 스피드 단어</div><p class="muted" style="margin:10px 0 16px">60초 동안 최대한 많은 단어의 뜻을 맞히세요. 틀리면 -1점!</p><button class="pri" id="go" style="font-size:16px;padding:12px 24px">시작 ▶</button></div>`;$('#go').onclick=()=>{let left=60,score=0,n=0,q;const tick=setInterval(()=>{left--;const t=$('#tm');if(t)t.textContent=left;if(left<=0){clearInterval(tick);box.innerHTML=`<div class="card" style="text-align:center"><div class="eyebrow">시간 종료</div><div class="big-score" style="margin:10px 0;color:var(--accent)">${score}<span style="font-size:20px;color:var(--muted)">점</span></div><p class="muted">${n}문제 도전</p><button class="pri" id="go2">다시</button></div>`;$('#go2').onclick=()=>sGames(el);logAct('스피드단어','60초 스피드 단어',Math.min(100,score*5))}},1000);const next=()=>{const w=V[Math.floor(Math.random()*V.length)];const opts=shuffle([w[2],...pick(V.filter(v=>v[0]!==w[0]),3).map(v=>v[2])]);box.innerHTML=`<div class="card"><div class="row" style="justify-content:space-between"><span class="timer" id="tm" style="font-size:32px">${left}</span><span class="pill acc" style="font-size:16px">${score}점</span></div><div class="word" style="text-align:center;margin:16px 0">${esc(w[0])}</div><div class="opt">${opts.map(o=>`<button data-o="${esc(o)}">${esc(o)}</button>`).join('')}</div></div>`;$$('[data-o]').forEach(b=>b.onclick=()=>{n++;if(b.dataset.o===w[2]){score++;b.classList.add('ok')}else{score--;b.classList.add('no')}setTimeout(next,250)})};next()}}
+ else{const V=allVocab();let w,guessed,wrong;const start=()=>{w=V[Math.floor(Math.random()*V.length)];guessed=new Set();wrong=0;draw()};const draw=()=>{const word=w[0].toLowerCase();const shown=word.split('').map(c=>c===' '||c==="'"?c:guessed.has(c)?c:'_').join(' ');const won=!shown.includes('_'),lost=wrong>=6;box.innerHTML=`<div class="card" style="text-align:center"><div class="row" style="justify-content:space-between"><span class="eyebrow">단어 맞히기</span><span class="pill ${wrong>=4?'bad':''}">남은 기회 ${6-wrong}</span></div><p class="muted" style="margin-top:12px">힌트: ${esc(w[2])} <span class="pos">${esc(w[1])}</span></p><div class="word" style="letter-spacing:.15em;margin:14px 0">${shown}</div>${won?`<p style="color:var(--good);font-weight:700">정답! 🎉 <span class="serif">${esc(w[3])}</span></p>`:lost?`<p style="color:var(--bad);font-weight:700">정답은 <b>${esc(w[0])}</b></p>`:''}<div class="chips" style="justify-content:center;margin-top:10px">${'abcdefghijklmnopqrstuvwxyz'.split('').map(c=>`<button class="sm ${guessed.has(c)?'used':''}" data-l="${c}" ${won||lost?'disabled':''}>${c}</button>`).join('')}</div>${won||lost?'<div style="margin-top:14px"><button class="pri" id="nw">다음 단어 →</button></div>':''}</div>`;$$('[data-l]').forEach(b=>b.onclick=()=>{const c=b.dataset.l;guessed.add(c);if(!word.includes(c))wrong++;draw()});const nw=$('#nw');if(nw){logAct('단어맞히기','단어 맞히기: '+w[0],won?100:0);nw.onclick=start}};start()}})}
+
+function sWrite(el){const tasks=store.get('notices',[]).filter(n=>n.kind==='task'&&(!n.g||n.g===S.grade));const topic=tasks.length?tasks[tasks.length-1].topic||tasks[tasks.length-1].title:'My favorite season (50단어 이상)';const k='draft.'+S.student.no;
+ el.innerHTML=`<div class="card"><div class="eyebrow">Writing topic</div><h2 style="margin-top:4px">${esc(topic)}</h2><textarea id="txt" placeholder="Write in English…" style="margin-top:12px;min-height:180px;font-family:var(--serif);font-size:17px">${esc(store.get(k,''))}</textarea><div class="row" style="justify-content:space-between;margin-top:10px"><span class="small muted" id="cnt"></span><div class="row"><button id="chk">🔍 점검</button><button class="pri" id="sub">제출하기</button></div></div><div id="rep" class="list" style="margin-top:12px"></div></div>
+ <div class="card"><h3>✍️ 영작 체크리스트</h3><ul style="margin:8px 0 0;padding-left:20px" class="small"><li>첫 글자는 대문자, 문장 끝엔 마침표(. ? !)</li><li>'I'는 항상 대문자</li><li>주어 + 동사가 있는지, 3인칭 단수엔 -s</li><li>한 문단에 하나의 주제, 연결어(First, Also, Finally) 활용</li></ul></div>`;
+ const txt=$('#txt');const count=()=>{const w=txt.value.trim().split(/\s+/).filter(Boolean).length;$('#cnt').textContent=`${w}단어 · ${txt.value.length}자`};count();txt.oninput=()=>{count();store.set(k,txt.value)};
+ const check=()=>{const t=txt.value;const issues=[];t.split(/(?<=[.?!])\s+/).filter(s=>s.trim()).forEach(s=>{if(/^[a-z]/.test(s.trim()))issues.push('문장 첫 글자를 대문자로: "'+s.trim().slice(0,25)+'…"')});if(/(^|\s)i(\s|'|,)/.test(t))issues.push("'i'는 대문자 I로 써요");if(t.trim()&&!/[.?!]$/.test(t.trim()))issues.push('마지막 문장에 마침표가 없어요');if(/\s{2,}/.test(t))issues.push('띄어쓰기가 두 번 들어간 곳이 있어요');if(/\b(a) [aeiou]/i.test(t))issues.push('모음 앞에는 a 대신 an');if(/\b(he|she|it) (go|do|have|like|want|play|eat|watch|study)\b/i.test(t))issues.push('3인칭 단수 주어 뒤 동사에 -s/-es가 필요할 수 있어요');const w=t.trim().split(/\s+/).filter(Boolean).length;if(w&&w<50)issues.push(`지금 ${w}단어 · 50단어를 목표로 조금 더 써 보세요`);return issues};
+ $('#chk').onclick=()=>{const is=check();$('#rep').innerHTML=is.length?is.map(i=>`<div class="item"><span>⚠️</span><span class="small">${esc(i)}</span></div>`).join(''):'<div class="item on"><span>✅</span><span class="small">기본 점검 통과! 내용을 한 번 더 읽어 보고 제출하세요.</span></div>';logAct('영작점검','영작 점검 '+is.length+'건')};
+ $('#sub').onclick=()=>{const t=txt.value.trim();if(t.split(/\s+/).length<10){toast('10단어 이상 써 주세요');return}const subs=store.get('subs',[]);subs.push({id:uid(),t:Date.now(),s:S.student.name,n:S.student.no,g:S.grade,kind:'영작',title:topic,body:t});store.set('subs',subs);store.del(k);logAct('영작제출','영작 제출: '+topic,null);toast('제출했어요 ✓');sMy(el);S.tab='my';save();render()}}
+
+function sNotice(el){const N=store.get('notices',[]).filter(n=>!n.g||n.g===S.grade).slice().reverse();el.innerHTML=N.length?`<div class="list">${N.map(n=>`<div class="item" style="flex-direction:column;gap:4px"><div class="row" style="justify-content:space-between;width:100%"><b>${n.kind==='task'?'📝 ':'📢 '}${esc(n.title)}</b><span class="small muted">${fmt(n.t)}${n.g?' · '+gname(n.g):''}</span></div><div class="small" style="white-space:pre-wrap">${esc(n.body)}</div>${n.kind==='task'?`<button class="sm pri" data-w="1" style="align-self:flex-start;margin-top:4px">영작 탭에서 제출하기 →</button>`:''}</div>`).join('')}</div>`:'<div class="card" style="text-align:center" ><p class="muted">아직 공지나 과제가 없어요.</p></div>';$$('[data-w]').forEach(b=>b.onclick=()=>{S.tab='write';save();render()})}
+
+function sMy(el){const L=myLog().slice().reverse();const subs=store.get('subs',[]).filter(s=>s.s===S.student.name&&s.n===S.student.no).reverse();const types={};L.forEach(l=>{if(l.score!=null){types[l.type]=types[l.type]||[];types[l.type].push(l.score)}});const gr=store.get('scores',{})[S.student.name+'#'+S.student.no];
+ const code=btoa(unescape(encodeURIComponent(JSON.stringify({v:1,student:S.student,g:S.grade,log:myLog().slice(-300),subs,known:store.get('known.'+S.student.no,[])}))));
+ el.innerHTML=`<div class="card"><div class="row" style="justify-content:space-between"><h3>📈 영역별 평균</h3><span class="small muted">총 ${L.length}개 활동</span></div>${Object.keys(types).length?`<div class="bar" style="margin:28px 0 30px">${Object.entries(types).map(([k,v])=>{const a=Math.round(v.reduce((x,y)=>x+y,0)/v.length);return `<div style="height:${Math.max(4,a)}%"><span>${a}</span><b>${esc(k)}</b></div>`}).join('')}</div>`:'<p class="muted small" style="margin-top:8px">점수가 있는 활동을 하면 그래프가 생겨요.</p>'}</div>
+ ${gr?`<div class="card"><h3>📝 수행평가 점수</h3><div class="row" style="margin-top:10px">${['말하기','영작','단어','태도'].map(k=>`<div class="stat"><b class="num">${esc(gr[k]??'–')}</b><span>${k}</span></div>`).join('')}</div>${gr.memo?`<p class="small" style="margin-top:8px">${esc(TEACHER_NAME)} 코멘트: ${esc(gr.memo)}</p>`:''}</div>`:''}
+ <div class="card"><h3>📤 활동 코드</h3><p class="small muted" style="margin-top:4px">다른 기기에서 했다면 이 코드를 복사해 ${esc(TEACHER_NAME)}께 보내세요. 선생님 컴퓨터의 "기록 관리"에 붙여 넣으면 기록이 합쳐져요.</p><div class="row" style="margin-top:10px"><input id="code" readonly value="${code}" style="flex:1;font-family:ui-monospace,monospace;font-size:12px"><button class="pri" id="cp">복사</button></div></div>
+ ${subs.length?`<div class="card"><h3>📥 내 제출물</h3><div class="list" style="margin-top:10px">${subs.map(s=>`<div class="item" style="flex-direction:column"><div class="row" style="justify-content:space-between;width:100%"><b>${esc(s.kind)} · ${esc(s.title)}</b><span class="small muted">${fmt(s.t)}</span></div><div class="small serif" style="white-space:pre-wrap">${esc(s.body)}</div>${s.fb?`<div class="notice small" style="width:100%">💬 ${esc(TEACHER_NAME)}: ${esc(s.fb)}</div>`:'<span class="small muted">피드백 대기 중</span>'}</div>`).join('')}</div></div>`:''}
+ <div class="card"><h3>🕒 최근 활동</h3><div class="tscroll" style="margin-top:8px"><table><tr><th>시간</th><th>활동</th><th>내용</th><th style="text-align:right">점수</th></tr>${L.slice(0,30).map(l=>`<tr><td class="muted small">${fmt(l.t)}</td><td>${esc(l.type)}</td><td>${esc(l.detail)}</td><td class="n">${l.score==null?'':l.score}</td></tr>`).join('')||'<tr><td colspan="4" class="muted">아직 없음</td></tr>'}</table></div></div>`;
+ $('#cp').onclick=()=>copy(code)}
+
+/* ================= TEACHER ================= */
+function studentsOf(){return Object.values(store.get('students',{}))}
+function tDash(el){if(!requireTeacher())return;const L=store.get('log',[]);const st=studentsOf();const now=Date.now();const todayL=L.filter(l=>new Date(l.t).toDateString()===today());const scored=L.filter(l=>l.score!=null);const live={};L.filter(l=>now-l.t<10*60*1000).forEach(l=>live[l.s+'#'+l.n]=l);const byType={};L.forEach(l=>{byType[l.type]=byType[l.type]||{n:0,s:[]};byType[l.type].n++;if(l.score!=null)byType[l.type].s.push(l.score)});const weak=Object.entries(byType).filter(([k,v])=>v.s.length).map(([k,v])=>[k,Math.round(v.s.reduce((a,b)=>a+b,0)/v.s.length),v.s.length]).sort((a,b)=>a[1]-b[1]);const per={};scored.forEach(l=>{const k=l.s+'#'+l.n;per[k]=per[k]||{name:l.s,no:l.n,s:[]};per[k].s.push(l.score)});const top=Object.values(per).map(p=>({...p,avg:Math.round(p.s.reduce((a,b)=>a+b,0)/p.s.length)})).sort((a,b)=>b.avg-a.avg).slice(0,5);const days=[...Array(7)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()-6+i);const key=d.toDateString();return [`${d.getMonth()+1}/${d.getDate()}`,L.filter(l=>new Date(l.t).toDateString()===key).length]});const mx=Math.max(1,...days.map(d=>d[1]));
+ el.innerHTML=`<div class="row" style="align-items:stretch;margin-bottom:14px"><div class="stat"><b class="num">${st.length}</b><span>등록 학생</span></div><div class="stat"><b class="num">${todayL.length}</b><span>오늘 활동</span></div><div class="stat"><b class="num">${scored.length?Math.round(scored.reduce((a,l)=>a+l.score,0)/scored.length):'–'}</b><span>전체 평균</span></div><div class="stat"><b class="num">${store.get('subs',[]).filter(s=>!s.fb).length}</b><span>피드백 대기</span></div></div>
+ <div class="card"><div class="row" style="justify-content:space-between"><h3>🟢 지금 활동 중 (10분 내)</h3><span class="small muted">${Object.keys(live).length}명</span></div>${Object.keys(live).length?`<div class="list" style="margin-top:10px">${Object.values(live).sort((a,b)=>b.t-a.t).map(l=>`<div class="item" style="align-items:center"><span class="pill good">●</span><b>${esc(l.s)} (${l.n}번)</b><span class="small muted">${esc(l.type)} · ${esc(l.detail)}</span><span class="small muted" style="margin-left:auto">${fmt(l.t)}</span></div>`).join('')}</div>`:'<p class="muted small" style="margin-top:6px">최근 10분간 활동한 학생이 없어요.</p>'}</div>
+ <div class="card"><h3>📅 최근 7일 활동</h3><div class="bar" style="margin:26px 0 28px">${days.map(d=>`<div style="height:${d[1]/mx*100}%"><span>${d[1]}</span><b>${d[0]}</b></div>`).join('')}</div></div>
+ <div class="row" style="align-items:stretch"><div class="card" style="flex:1;min-width:260px"><h3>⚠️ 보완이 필요한 영역</h3><div class="list" style="margin-top:10px">${weak.slice(0,5).map(w=>`<div class="item" style="align-items:center"><b style="flex:1">${esc(w[0])}</b><span class="pill ${w[1]<60?'bad':w[1]<80?'warn':'good'}">${w[1]}점</span><span class="small muted">${w[2]}회</span></div>`).join('')||'<p class="muted small">아직 점수 데이터가 없어요.</p>'}</div></div><div class="card" style="flex:1;min-width:260px"><h3>🏆 TOP 5</h3><div class="list" style="margin-top:10px">${top.map((p,i)=>`<div class="item" style="align-items:center"><span class="pill acc">${i+1}</span><b style="flex:1">${esc(p.name)} (${p.no}번)</b><span>${p.avg}점</span></div>`).join('')||'<p class="muted small">아직 없음</p>'}</div></div></div>
+ <div class="card"><h3>📚 활동 종류별</h3><div class="tscroll" style="margin-top:8px"><table><tr><th>활동</th><th style="text-align:right">횟수</th><th style="text-align:right">평균</th></tr>${Object.entries(byType).sort((a,b)=>b[1].n-a[1].n).map(([k,v])=>`<tr><td>${esc(k)}</td><td class="n">${v.n}</td><td class="n">${v.s.length?Math.round(v.s.reduce((a,b)=>a+b,0)/v.s.length):'–'}</td></tr>`).join('')}</table></div></div>`}
+
+function tStudents(el){if(!requireTeacher())return;const st=studentsOf().sort((a,b)=>a.g.localeCompare(b.g)||a.no-b.no);const L=store.get('log',[]);const sel=S.sub;
+ if(!sel){el.innerHTML=`<div class="card"><div class="row" style="justify-content:space-between"><h3>👥 학생 ${st.length}명</h3><input id="q" placeholder="이름 검색" style="width:160px"></div><div class="tscroll" style="margin-top:10px"><table id="tb"><tr><th>학년</th><th>번호</th><th>이름</th><th style="text-align:right">활동</th><th style="text-align:right">평균</th><th>최근</th></tr>${st.map(s=>{const my=L.filter(l=>l.s===s.name&&l.n===s.no);const sc=my.filter(l=>l.score!=null);return `<tr data-k="${esc(s.name)}#${s.no}" style="cursor:pointer"><td class="small muted">${gname(s.g).replace('학교 ','')}</td><td class="n">${s.no}</td><td><b>${esc(s.name)}</b></td><td class="n">${my.length}</td><td class="n">${sc.length?Math.round(sc.reduce((a,l)=>a+l.score,0)/sc.length):'–'}</td><td class="small muted">${fmt(s.last)}</td></tr>`}).join('')||'<tr><td colspan="6" class="muted">아직 입장한 학생이 없어요</td></tr>'}</table></div></div>`;$('#q').oninput=e=>{const q=e.target.value.trim();$$('#tb tr[data-k]').forEach(r=>r.hidden=q&&!r.dataset.k.includes(q))};$$('tr[data-k]').forEach(r=>r.onclick=()=>{S.sub=r.dataset.k;save();tStudents(el)});return}
+ const [name,no]=sel.split('#');const my=L.filter(l=>l.s===name&&l.n===+no).slice().reverse();const subs=store.get('subs',[]).filter(s=>s.s===name&&s.n===+no);const types={};my.forEach(l=>{if(l.score!=null){types[l.type]=types[l.type]||[];types[l.type].push(l.score)}});
+ el.innerHTML=`<button class="sm ghost" id="back">← 학생 목록</button><div class="card" style="margin-top:10px"><h2>${esc(name)} (${no}번)</h2><div class="row" style="margin-top:12px"><div class="stat"><b class="num">${my.length}</b><span>활동</span></div><div class="stat"><b class="num">${subs.length}</b><span>제출물</span></div><div class="stat"><b class="num">${new Set(my.map(l=>new Date(l.t).toDateString())).size}</b><span>학습일</span></div></div>${Object.keys(types).length?`<div class="bar" style="margin:28px 0 30px">${Object.entries(types).map(([k,v])=>{const a=Math.round(v.reduce((x,y)=>x+y,0)/v.length);return `<div style="height:${Math.max(4,a)}%"><span>${a}</span><b>${esc(k)}</b></div>`}).join('')}</div>`:''}</div>
+ <div class="card"><h3>🕒 활동 기록</h3><div class="tscroll" style="margin-top:8px"><table><tr><th>시간</th><th>활동</th><th>내용</th><th style="text-align:right">점수</th></tr>${my.slice(0,60).map(l=>`<tr><td class="muted small">${fmt(l.t)}</td><td>${esc(l.type)}</td><td>${esc(l.detail)}</td><td class="n">${l.score==null?'':l.score}</td></tr>`).join('')}</table></div></div>`;$('#back').onclick=()=>{S.sub=null;save();tStudents(el)}}
+
+function tRange(el){if(!requireTeacher())return;const g=S.sub||'m1';const r=rangeOf(g);const st=studentsOf().filter(s=>s.g===g);
+ el.innerHTML=`<div class="tabs" style="margin-bottom:14px">${GRADES.map(x=>`<button class="${x[0]===g?'on':''}" data-g="${x[0]}">${x[1].replace('학교 ','')}</button>`).join('')}</div><div class="card"><div class="eyebrow">시험 범위 편집</div><input id="rt" value="${esc(r.title)}" style="margin-top:8px;font-weight:700"><div id="units" class="list" style="margin-top:12px">${r.units.map((u,i)=>`<div class="item" style="flex-direction:column"><div class="row" style="width:100%"><input data-u="${i}" data-f="0" value="${esc(u[0])}" placeholder="단원명" style="flex:1"><button class="sm danger" data-del="${i}">삭제</button></div><input data-u="${i}" data-f="1" value="${esc(u[1])}" placeholder="핵심 내용" class="small"></div>`).join('')}</div><div class="row" style="margin-top:10px"><button id="addU">+ 단원 추가</button></div><div class="eyebrow" style="margin-top:18px">공부 팁 (한 줄에 하나)</div><textarea id="tips" style="margin-top:6px">${esc(r.tips.join('\n'))}</textarea><div class="row" style="justify-content:flex-end;margin-top:12px"><button id="reset">기본값으로</button><button class="pri" id="saveR">저장</button></div></div>
+ <div class="card"><h3>✅ 학생별 완료 현황 (${gname(g)})</h3><div class="tscroll" style="margin-top:8px"><table><tr><th>학생</th>${r.units.map((u,i)=>`<th>${i+1}</th>`).join('')}</tr>${st.map(s=>{const d=store.get('rangeDone.'+g+'.'+s.no,[]);return `<tr><td>${esc(s.name)} (${s.no})</td>${r.units.map((u,i)=>`<td>${d.includes(i)?'<span style="color:var(--good)">✓</span>':'<span class="muted">·</span>'}</td>`).join('')}</tr>`}).join('')||`<tr><td colspan="${r.units.length+1}" class="muted">이 학년 학생이 아직 없어요</td></tr>`}</table></div></div>`;
+ $$('[data-g]').forEach(b=>b.onclick=()=>{S.sub=b.dataset.g;save();tRange(el)});const collect=()=>{const units=[];$$('#units .item').forEach(it=>{const a=it.querySelector('[data-f="0"]').value.trim(),b=it.querySelector('[data-f="1"]').value.trim();if(a)units.push([a,b])});return{title:$('#rt').value.trim()||r.title,units,tips:$('#tips').value.split('\n').map(x=>x.trim()).filter(Boolean)}};
+ $('#saveR').onclick=()=>{store.set('range.'+g,collect());toast('저장했어요');tRange(el)};$('#addU').onclick=()=>{const c=collect();c.units.push(['새 단원','']);store.set('range.'+g,c);tRange(el)};$$('[data-del]').forEach(b=>b.onclick=()=>{const c=collect();c.units.splice(+b.dataset.del,1);store.set('range.'+g,c);tRange(el)});$('#reset').onclick=()=>{store.del('range.'+g);tRange(el)}}
+
+function tNotice(el){if(!requireTeacher())return;const N=store.get('notices',[]).slice().reverse();
+ el.innerHTML=`<div class="card"><h3>새 공지 / 과제</h3><form id="f" class="stack" style="margin-top:10px"><div class="row"><select id="kind" style="width:auto"><option value="notice">📢 공지</option><option value="task">📝 과제(영작)</option></select><select id="g" style="width:auto"><option value="">전체 학년</option>${GRADES.map(x=>`<option value="${x[0]}">${x[1]}</option>`).join('')}</select></div><input id="title" placeholder="제목" required><textarea id="body" placeholder="내용 (과제라면 영작 주제와 조건을 적어 주세요. 예: My weekend plan, 60단어 이상)" style="min-height:90px"></textarea><div class="row" style="justify-content:flex-end"><button class="pri" type="submit">등록</button></div></form></div>
+ <div class="card"><h3>등록된 공지·과제 ${N.length}</h3><div class="list" style="margin-top:10px">${N.map(n=>`<div class="item" style="flex-direction:column"><div class="row" style="justify-content:space-between;width:100%"><b>${n.kind==='task'?'📝 ':'📢 '}${esc(n.title)}</b><div class="row"><span class="small muted">${fmt(n.t)}${n.g?' · '+gname(n.g):' · 전체'}</span><button class="sm danger" data-del="${n.id}">삭제</button></div></div><div class="small" style="white-space:pre-wrap">${esc(n.body)}</div></div>`).join('')||'<p class="muted small">없음</p>'}</div></div>`;
+ $('#f').onsubmit=e=>{e.preventDefault();const N=store.get('notices',[]);const kind=$('#kind').value;N.push({id:uid(),t:Date.now(),kind,g:$('#g').value,title:$('#title').value.trim(),body:$('#body').value.trim(),topic:kind==='task'?$('#title').value.trim():''});store.set('notices',N);toast('등록했어요');tNotice(el)};$$('[data-del]').forEach(b=>b.onclick=()=>{store.set('notices',store.get('notices',[]).filter(n=>n.id!==b.dataset.del));tNotice(el)})}
+
+function tSubmit(el){if(!requireTeacher())return;const subs=store.get('subs',[]).slice().reverse();const f=S.sub||'all';const list=subs.filter(s=>f==='all'||(f==='wait'?!s.fb:!!s.fb));
+ el.innerHTML=`<div class="row" style="justify-content:space-between;margin-bottom:12px"><div class="chips">${[['all','전체 '+subs.length],['wait','대기 '+subs.filter(s=>!s.fb).length],['done','완료 '+subs.filter(s=>s.fb).length]].map(x=>`<button class="${x[0]===f?'pri':''}" data-f="${x[0]}">${x[1]}</button>`).join('')}</div><button class="sm" id="cpAll">전체 복사</button></div><div class="list">${list.map(s=>`<div class="card" style="margin:0"><div class="row" style="justify-content:space-between"><div><b>${esc(s.s)} (${s.n}번)</b> <span class="small muted">· ${gname(s.g)} · ${fmt(s.t)}</span><div class="small"><span class="pill acc">${esc(s.kind)}</span> ${esc(s.title)}</div></div><span class="small muted">${s.body.split(/\s+/).length}단어</span></div><div class="passage" style="margin-top:10px;font-size:16px;white-space:pre-wrap">${esc(s.body)}</div><div class="row" style="margin-top:10px"><input data-fb="${s.id}" placeholder="피드백 (칭찬 1 + 고칠 점 1)" value="${esc(s.fb||'')}" style="flex:1"><button class="pri sm" data-save="${s.id}">저장</button><button class="sm danger" data-del="${s.id}">삭제</button></div></div>`).join('')||'<div class="card"><p class="muted">제출물이 없어요.</p></div>'}</div>`;
+ $$('[data-f]').forEach(b=>b.onclick=()=>{S.sub=b.dataset.f;save();tSubmit(el)});$$('[data-save]').forEach(b=>b.onclick=()=>{const all=store.get('subs',[]);const s=all.find(x=>x.id===b.dataset.save);s.fb=$(`[data-fb="${b.dataset.save}"]`).value.trim();store.set('subs',all);toast('피드백 저장');tSubmit(el)});$$('[data-del]').forEach(b=>b.onclick=()=>{store.set('subs',store.get('subs',[]).filter(x=>x.id!==b.dataset.del));tSubmit(el)});$('#cpAll').onclick=()=>copy(list.map(s=>`[${s.s} ${s.n}번 · ${s.title}]\n${s.body}\n`).join('\n'))}
+
+function tGrade(el){if(!requireTeacher())return;const st=studentsOf().sort((a,b)=>a.g.localeCompare(b.g)||a.no-b.no);const SC=store.get('scores',{});const cols=['말하기','영작','단어','태도'];
+ el.innerHTML=`<div class="card"><div class="row" style="justify-content:space-between"><div><h3>📝 수행평가 채점표</h3><p class="small muted">각 항목 0~25점 · 학생 "내 기록"에 표시돼요</p></div><div class="row"><button class="sm" id="auto">활동 평균 불러오기</button><button class="sm" id="cp">엑셀용 복사</button></div></div><div class="tscroll" style="margin-top:10px"><table><tr><th>학생</th>${cols.map(c=>`<th>${c}</th>`).join('')}<th>합계</th><th>코멘트</th></tr>${st.map(s=>{const k=s.name+'#'+s.no;const r=SC[k]||{};const sum=cols.reduce((a,c)=>a+(+r[c]||0),0);return `<tr data-k="${esc(k)}"><td><b>${esc(s.name)}</b> <span class="small muted">${s.no}</span></td>${cols.map(c=>`<td><input type="number" min="0" max="25" data-c="${c}" value="${r[c]??''}" style="width:64px;padding:6px"></td>`).join('')}<td class="n"><b>${sum}</b></td><td><input data-c="memo" value="${esc(r.memo||'')}" style="min-width:140px;padding:6px"></td></tr>`}).join('')||'<tr><td colspan="7" class="muted">학생이 없어요</td></tr>'}</table></div><div class="row" style="justify-content:flex-end;margin-top:12px"><button class="pri" id="saveG">저장</button></div></div>`;
+ const collect=()=>{const out={};$$('tr[data-k]').forEach(r=>{const o={name:r.dataset.k.split('#')[0],no:+r.dataset.k.split('#')[1]};r.querySelectorAll('input').forEach(i=>{if(i.dataset.c==='memo')o.memo=i.value.trim();else if(i.value!=='')o[i.dataset.c]=Math.max(0,Math.min(25,+i.value))});out[r.dataset.k]=o});return out};
+ $('#saveG').onclick=()=>{store.set('scores',collect());toast('저장했어요');tGrade(el)};$('#cp').onclick=()=>copy('이름\t번호\t'+cols.join('\t')+'\t합계\t코멘트\n'+st.map(s=>{const r=SC[s.name+'#'+s.no]||{};return [s.name,s.no,...cols.map(c=>r[c]??''),cols.reduce((a,c)=>a+(+r[c]||0),0),r.memo||''].join('\t')}).join('\n'));
+ $('#auto').onclick=()=>{const L=store.get('log',[]);const map={'말하기':['말하기','역할극','회화표현'],'영작':['영작제출','영작점검'],'단어':['단어테스트','스펠링','스피드단어','단어맞히기','듣기']};$$('tr[data-k]').forEach(r=>{const [n,no]=r.dataset.k.split('#');const my=L.filter(l=>l.s===n&&l.n===+no);Object.entries(map).forEach(([c,ts])=>{const sc=my.filter(l=>ts.includes(l.type)&&l.score!=null).map(l=>l.score);const inp=r.querySelector(`[data-c="${c}"]`);if(sc.length&&inp.value==='')inp.value=Math.round(sc.reduce((a,b)=>a+b,0)/sc.length/4)});const att=r.querySelector('[data-c="태도"]');if(att.value==='')att.value=Math.min(25,new Set(my.map(l=>new Date(l.t).toDateString())).size*5)});toast('빈 칸에 활동 평균을 채웠어요 (저장 필요)')}}
+
+function tBank(el){if(!requireTeacher())return;const bv=store.get('bank.vocab',[]),bg=store.get('bank.grammar',[]);
+ el.innerHTML=`<div class="row" style="align-items:stretch"><div class="card" style="flex:1;min-width:280px;margin:0"><h3>📖 단어 추가 (${bv.length})</h3><form id="fv" class="stack" style="margin-top:10px"><div class="row"><input id="w" placeholder="word" required style="flex:2" autocapitalize="off"><input id="p" placeholder="품사 (n./v./adj.)" style="flex:1"></div><input id="m" placeholder="뜻" required><input id="ex" placeholder="예문" required><div class="row" style="justify-content:flex-end"><button class="pri" type="submit">추가</button></div></form><div class="list" style="margin-top:10px">${bv.map((v,i)=>`<div class="item" style="align-items:center"><div style="flex:1"><b class="serif">${esc(v[0])}</b> <span class="small muted">${esc(v[1])}</span> ${esc(v[2])}<div class="small muted serif">${esc(v[3])}</div></div><button class="sm danger" data-dv="${i}">삭제</button></div>`).join('')}</div></div>
+ <div class="card" style="flex:1;min-width:280px;margin:0"><h3>🧩 문법 문제 추가 (${bg.length})</h3><form id="fg" class="stack" style="margin-top:10px"><input id="q" placeholder="문장 (빈칸은 ___ 로)" required><div class="row">${[0,1,2,3].map(i=>`<input class="o" placeholder="보기 ${i+1}" required style="flex:1;min-width:100px">`).join('')}</div><div class="row"><select id="a" style="width:auto"><option value="0">정답: 보기 1</option><option value="1">정답: 보기 2</option><option value="2">정답: 보기 3</option><option value="3">정답: 보기 4</option></select><input id="e" placeholder="해설" style="flex:1"></div><div class="row" style="justify-content:flex-end"><button class="pri" type="submit">추가</button></div></form><div class="list" style="margin-top:10px">${bg.map((g,i)=>`<div class="item" style="align-items:center"><div style="flex:1"><b class="serif">${esc(g[0])}</b><div class="small muted">정답: ${esc(g[1][g[2]])}</div></div><button class="sm danger" data-dg="${i}">삭제</button></div>`).join('')}</div></div></div><p class="small muted" style="margin-top:10px">추가한 단어·문제는 학생의 단어 카드, 테스트, 문법 퀴즈, 스피드 게임에 기본 문제와 섞여 나와요.</p>`;
+ $('#fv').onsubmit=e=>{e.preventDefault();bv.push([$('#w').value.trim(),$('#p').value.trim()||'n.',$('#m').value.trim(),$('#ex').value.trim()]);store.set('bank.vocab',bv);toast('추가했어요');tBank(el)};$('#fg').onsubmit=e=>{e.preventDefault();bg.push([$('#q').value.trim(),$$('.o').map(o=>o.value.trim()),+$('#a').value,$('#e').value.trim()]);store.set('bank.grammar',bg);toast('추가했어요');tBank(el)};$$('[data-dv]').forEach(b=>b.onclick=()=>{bv.splice(+b.dataset.dv,1);store.set('bank.vocab',bv);tBank(el)});$$('[data-dg]').forEach(b=>b.onclick=()=>{bg.splice(+b.dataset.dg,1);store.set('bank.grammar',bg);tBank(el)})}
+
+let timerI=null;
+function tPick(el){if(!requireTeacher())return;const st=studentsOf();const names=store.get('pickNames',st.map(s=>s.name).join(', '));
+ el.innerHTML=`<div class="row" style="align-items:stretch"><div class="card" style="flex:1;min-width:280px;margin:0"><h3>🎲 학생 뽑기</h3><textarea id="names" style="margin-top:10px;min-height:80px" placeholder="이름을 쉼표로 구분 (비우면 입장한 학생 전체)">${esc(names)}</textarea><div class="row" style="margin-top:10px"><button class="pri" id="one">한 명 뽑기</button><input type="number" id="tn" value="4" min="2" max="10" style="width:70px"><button id="team">모둠 나누기</button></div><div id="pickOut" style="margin-top:14px;text-align:center;min-height:60px"></div></div>
+ <div class="card" style="flex:1;min-width:280px;margin:0"><h3>⏱️ 타이머</h3><div class="timer" id="tm" style="margin:10px 0">05:00</div><div class="row" style="justify-content:center"><button class="sm" data-m="1">1분</button><button class="sm" data-m="3">3분</button><button class="sm" data-m="5">5분</button><button class="sm" data-m="10">10분</button></div><div class="row" style="justify-content:center;margin-top:10px"><button class="pri" id="tStart">시작</button><button id="tStop">정지</button></div></div></div>`;
+ let secs=300;const show=()=>{$('#tm').textContent=String(Math.floor(secs/60)).padStart(2,'0')+':'+String(secs%60).padStart(2,'0')};$$('[data-m]').forEach(b=>b.onclick=()=>{clearInterval(timerI);secs=+b.dataset.m*60;show()});$('#tStart').onclick=()=>{clearInterval(timerI);timerI=setInterval(()=>{secs--;if(secs<=0){clearInterval(timerI);secs=0;$('#tm').style.color='var(--bad)';speak('Time is up!')}show()},1000)};$('#tStop').onclick=()=>clearInterval(timerI);
+ const getNames=()=>{const t=$('#names').value.trim();store.set('pickNames',t);return (t?t.split(/[,\n]/).map(x=>x.trim()).filter(Boolean):st.map(s=>s.name))};$('#one').onclick=()=>{const ns=getNames();if(!ns.length){toast('이름이 없어요');return}let k=0;const iv=setInterval(()=>{$('#pickOut').innerHTML=`<div class="word" style="color:var(--muted)">${esc(ns[Math.floor(Math.random()*ns.length)])}</div>`;if(++k>14){clearInterval(iv);$('#pickOut').innerHTML=`<div class="word" style="color:var(--accent)">${esc(ns[Math.floor(Math.random()*ns.length)])} 🎉</div>`}},80)};$('#team').onclick=()=>{const ns=shuffle(getNames());const n=+$('#tn').value||4;const teams=[...Array(n)].map(()=>[]);ns.forEach((x,i)=>teams[i%n].push(x));$('#pickOut').innerHTML=`<div class="grid" style="text-align:left">${teams.map((t,i)=>`<div class="item" style="flex-direction:column"><b>Team ${i+1}</b><span class="small">${t.map(esc).join(', ')||'-'}</span></div>`).join('')}</div>`}}
+
+function tPreview(el){if(!requireTeacher())return;el.innerHTML=`<div class="card" style="text-align:center"><h3>🎒 학생 화면 보기</h3><p class="muted small" style="margin:8px 0 14px">"미리보기" 학생으로 입장해 학생이 보는 화면 그대로 확인할 수 있어요. 미리보기 활동은 통계에 섞이지 않도록 나갈 때 자동 삭제돼요.</p><div class="row" style="justify-content:center"><select id="pg" style="width:auto">${GRADES.map(g=>`<option value="${g[0]}">${g[1]}</option>`).join('')}</select><button class="pri" id="go">학생 화면으로 →</button></div></div>`;$('#go').onclick=()=>{store.set('previewBack',true);S={role:'student',student:{name:'미리보기',no:0},grade:$('#pg').value,tab:'home'};save();render()}}
+const _logout=logout;logout=function(){if(S.role==='student'&&S.student&&S.student.no===0&&store.get('previewBack')){store.set('log',store.get('log',[]).filter(l=>!(l.n===0&&l.s==='미리보기')));const st=store.get('students',{});delete st['미리보기#0'];store.set('students',st);store.set('subs',store.get('subs',[]).filter(s=>s.n!==0));store.del('previewBack');S={role:'teacher',student:null,grade:'m1',tab:'preview'};save();render();return}_logout()};
+
+function tData(el){if(!requireTeacher())return;const L=store.get('log',[]);
+ el.innerHTML=`<div class="card"><h3>📥 학생 활동 코드 가져오기</h3><p class="small muted" style="margin-top:4px">학생이 "내 기록"에서 복사한 코드를 붙여 넣으면 그 학생의 기록이 합쳐져요(중복 제외).</p><div class="row" style="margin-top:10px"><input id="code" placeholder="활동 코드 붙여넣기" style="flex:1;font-family:ui-monospace,monospace;font-size:12px"><button class="pri" id="imp">가져오기</button></div><div id="impMsg" class="small" style="margin-top:8px;min-height:18px"></div></div>
+ <div class="card"><h3>💾 백업 / 복원</h3><p class="small muted" style="margin-top:4px">기록 ${L.length}개 · 학생 ${studentsOf().length}명 · 제출물 ${store.get('subs',[]).length}개</p><div class="row" style="margin-top:10px"><button id="bk">백업 복사(JSON)</button><button id="csv">활동 CSV 복사</button></div><textarea id="rs" placeholder="백업 JSON을 붙여 넣고 복원" style="margin-top:10px;min-height:70px;font-family:ui-monospace,monospace;font-size:12px"></textarea><div class="row" style="justify-content:space-between;margin-top:10px"><button id="restore">복원</button><button class="danger" id="wipe">모든 기록 삭제</button></div><div id="wipeBox" hidden style="margin-top:10px" class="notice small">정말 삭제할까요? 되돌릴 수 없어요. <button class="sm danger" id="wipeYes" style="margin-left:8px">네, 삭제합니다</button></div></div>`;
+ const KEYS=['log','students','subs','notices','scores','bank.vocab','bank.grammar'];
+ $('#imp').onclick=()=>{try{const d=JSON.parse(decodeURIComponent(escape(atob($('#code').value.trim()))));const L=store.get('log',[]);const have=new Set(L.map(l=>l.t+'|'+l.s+'|'+l.n+'|'+l.type));let n=0;(d.log||[]).forEach(l=>{const k=l.t+'|'+l.s+'|'+l.n+'|'+l.type;if(!have.has(k)){L.push(l);have.add(k);n++}});L.sort((a,b)=>a.t-b.t);store.set('log',L);const st=store.get('students',{});const key=d.student.name+'#'+d.student.no;st[key]=Object.assign(st[key]||{},{name:d.student.name,no:d.student.no,g:d.g,last:Math.max(st[key]?.last||0,...(d.log||[]).map(l=>l.t))});store.set('students',st);const subs=store.get('subs',[]);let m=0;(d.subs||[]).forEach(s=>{if(!subs.some(x=>x.id===s.id)){subs.push(s);m++}});store.set('subs',subs);$('#impMsg').innerHTML=`<span style="color:var(--good)">${esc(d.student.name)} 학생: 활동 ${n}개, 제출물 ${m}개 가져왔어요.</span>`;$('#code').value=''}catch(e){$('#impMsg').innerHTML='<span style="color:var(--bad)">코드를 읽을 수 없어요. 전체를 정확히 붙여 넣었는지 확인하세요.</span>'}};
+ $('#bk').onclick=()=>{const o={};KEYS.forEach(k=>o[k]=store.get(k,null));GRADES.forEach(g=>o['range.'+g[0]]=store.get('range.'+g[0],null));copy(JSON.stringify(o))};$('#csv').onclick=()=>copy('시간,학년,번호,이름,활동,내용,점수\n'+L.map(l=>[new Date(l.t).toLocaleString(),gname(l.g),l.n,l.s,l.type,'"'+String(l.detail).replace(/"/g,'""')+'"',l.score??''].join(',')).join('\n'));
+ $('#restore').onclick=()=>{try{const o=JSON.parse($('#rs').value);Object.entries(o).forEach(([k,v])=>{if(v!=null)store.set(k,v)});toast('복원했어요');tData(el)}catch(e){toast('JSON 형식이 아니에요')}};$('#wipe').onclick=()=>{$('#wipeBox').hidden=false};$('#wipeYes').onclick=()=>{KEYS.forEach(k=>store.del(k));toast('모두 삭제했어요');tData(el)}}
+
+/* ================= BOOT ================= */
+if('speechSynthesis' in window)speechSynthesis.onvoiceschanged=()=>{};
+render();
+</script>
+</body>
+</html>
