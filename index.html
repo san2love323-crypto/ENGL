@@ -53,7 +53,9 @@ textarea{resize:vertical;min-height:120px;line-height:1.6}
 .who{margin-left:auto;display:flex;align-items:center;gap:8px}
 .chip{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;font-size:13px;font-weight:600;background:var(--soft)}
 .chip.t{background:var(--accent-soft);color:var(--accent)}
-.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:18px;scrollbar-width:none}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:18px;scrollbar-width:none;scroll-padding-inline:16px}
+@media (min-width:700px){nav.tabs{flex-wrap:wrap;overflow:visible}}
+@media (max-width:699px){nav.tabs{mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent)}nav.tabs::after{content:'';flex:0 0 24px}}
 .tabs::-webkit-scrollbar{display:none}
 .tabs button{white-space:nowrap;border-radius:999px;padding:8px 14px;font-size:14px;border-color:transparent;background:transparent;color:var(--muted)}
 .tabs button:hover{background:var(--soft);color:var(--ink)}
